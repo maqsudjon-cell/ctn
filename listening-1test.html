@@ -1,0 +1,1823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Listening – Full Practice Test</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f8f7f4;
+    --surface: #ffffff;
+    --border: #e2ddd6;
+    --border-light: #ede9e3;
+    --text-primary: #1a1714;
+    --text-secondary: #5a5550;
+    --text-muted: #9a948e;
+    --accent: #1e6b4a;
+    --accent-light: #e8f4ef;
+    --accent-hover: #155438;
+    --red: #c0392b;
+    --red-light: #fdf0ef;
+    --blue: #1a4a7a;
+    --blue-light: #eef3f9;
+    --gold: #8b6914;
+    --gold-light: #fdf8ee;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    gap: 16px;
+  }
+  .header-title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+  }
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border-radius: var(--radius);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.18s ease;
+    white-space: nowrap;
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { background: var(--bg); color: var(--text-primary); }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .progress-pill {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .progress-pill span { color: var(--accent); font-weight: 600; }
+
+  /* ── Layout ── */
+  .page-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+
+  /* ── Page heading ── */
+  .page-heading {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .page-heading h1 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+  .page-heading p {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+  }
+
+  /* ── Highlight toolbar ── */
+  .highlight-toolbar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  /* ── Audio player ── */
+  .audio-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 14px 18px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+  .audio-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--accent);
+    font-size: 14px;
+  }
+  .audio-block audio {
+    flex: 1;
+    height: 32px;
+    min-width: 0;
+  }
+  .audio-block audio::-webkit-media-controls-panel { background: transparent; }
+
+  /* ── Part section ── */
+  .part-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    margin-bottom: 28px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .part-header {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fafaf8;
+  }
+  .part-badge {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #fff;
+    background: var(--accent);
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
+  .part-range {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+  .part-body {
+    padding: 24px;
+  }
+
+  /* ── Section titles ── */
+  .section-title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  .section-subtitle {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+  .instruction {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    line-height: 1.55;
+  }
+  .instruction strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .q-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin: 20px 0 10px;
+  }
+
+  /* ── Form table (Part 1) ── */
+  .form-table-wrap {
+    background: #fefefe;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 16px 0;
+  }
+  .form-table-title {
+    background: var(--accent);
+    color: #fff;
+    text-align: center;
+    padding: 10px 16px;
+    font-family: 'Source Serif 4', serif;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .form-table-subtitle {
+    background: var(--accent-light);
+    color: var(--accent);
+    text-align: center;
+    padding: 6px 16px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .form-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .form-table tr { border-bottom: 1px solid var(--border-light); }
+  .form-table tr:last-child { border-bottom: none; }
+  .form-table td {
+    padding: 10px 16px;
+    font-size: 0.88rem;
+    vertical-align: middle;
+  }
+  .form-table td:first-child {
+    width: 38%;
+    color: var(--text-secondary);
+    font-weight: 500;
+    border-right: 1px solid var(--border-light);
+  }
+  .static-val {
+    color: var(--text-primary);
+    font-style: italic;
+  }
+  .notes-cell { vertical-align: top !important; padding-top: 12px !important; }
+  .notes-list { list-style: none; }
+  .notes-list li {
+    padding: 5px 0;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .notes-list li::before {
+    content: "•";
+    color: var(--accent);
+    margin-right: 6px;
+    flex-shrink: 0;
+  }
+  .notes-list li span { color: var(--text-muted); font-style: italic; }
+  .notes-list li span em { font-style: normal; margin-left: 4px; }
+
+  /* ── Text input ── */
+  input[type="text"].ans-input {
+    border: 1.5px solid var(--border);
+    border-radius: 5px;
+    padding: 4px 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    background: var(--bg);
+    outline: none;
+    width: 130px;
+    transition: border-color 0.15s;
+    vertical-align: middle;
+  }
+  input[type="text"].ans-input:focus {
+    border-color: var(--accent);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(30,107,74,0.1);
+  }
+  input[type="text"].ans-input.correct { border-color: var(--accent); background: var(--accent-light); }
+  input[type="text"].ans-input.incorrect { border-color: var(--red); background: var(--red-light); }
+
+  /* ── MCQ ── */
+  .mcq-group { margin: 12px 0 18px; }
+  .mcq-question {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .mcq-question .qnum {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: var(--accent-light);
+    color: var(--accent);
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+  .mcq-options { display: flex; flex-direction: column; gap: 6px; }
+  .mcq-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    background: var(--bg);
+    user-select: none;
+  }
+  .mcq-option:hover { border-color: var(--accent); background: var(--accent-light); color: var(--text-primary); }
+  .mcq-option input[type="radio"] { display: none; }
+  .mcq-radio {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: all 0.15s;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .mcq-option.selected {
+    border-color: var(--accent);
+    background: var(--accent-light);
+    color: var(--text-primary);
+  }
+  .mcq-option.selected .mcq-radio {
+    border-color: var(--accent);
+    background: var(--accent);
+  }
+  .mcq-option.selected .mcq-radio::after {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #fff;
+    position: absolute;
+  }
+  .opt-letter {
+    font-weight: 600;
+    color: var(--text-muted);
+    min-width: 14px;
+    font-size: 0.8rem;
+  }
+  .mcq-option.selected .opt-letter { color: var(--accent); }
+
+  /* ── Drag rows (Part 2 Q15-20) ── */
+  .drag-options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+    margin: 12px 0 20px;
+    padding: 14px;
+    background: var(--blue-light);
+    border: 1px solid #c8d9ee;
+    border-radius: var(--radius);
+  }
+  .drag-chip {
+    padding: 7px 12px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .drag-chip:hover { border-color: var(--blue); color: var(--blue); }
+  .drag-chip.used { opacity: 0.4; cursor: default; }
+  .tea-table-wrap {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .tea-table { width: 100%; border-collapse: collapse; }
+  .tea-table th {
+    background: #f3f6fb;
+    padding: 9px 14px;
+    text-align: left;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .tea-table td {
+    padding: 9px 14px;
+    font-size: 0.875rem;
+    border-bottom: 1px solid var(--border-light);
+    vertical-align: middle;
+  }
+  .tea-table tr:last-child td { border-bottom: none; }
+  .tea-table td:first-child {
+    width: 28px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  .tea-table td:nth-child(2) { color: var(--text-secondary); }
+  .drop-target {
+    min-width: 100px;
+    min-height: 30px;
+    border: 1.5px dashed var(--border);
+    border-radius: 5px;
+    padding: 4px 10px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .drop-target:not(.filled):hover { border-color: var(--accent); color: var(--accent); }
+  .drop-target.filled { border-style: solid; border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+  .drop-target .clear-btn {
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.1s;
+  }
+  .drop-target .clear-btn:hover { opacity: 1; color: var(--red); }
+
+  /* ── Multi-select (Part 3 groups) ── */
+  .multi-select-group { margin: 12px 0 16px; }
+  .multi-count {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  .multi-count span { color: var(--accent); font-weight: 600; }
+  .multi-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    background: var(--bg);
+    margin-bottom: 6px;
+    user-select: none;
+  }
+  .multi-option:hover { border-color: var(--accent); background: var(--accent-light); }
+  .multi-option.selected { border-color: var(--accent); background: var(--accent-light); color: var(--text-primary); }
+  .multi-checkbox {
+    width: 16px; height: 16px;
+    border-radius: 3px;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    color: transparent;
+  }
+  .multi-option.selected .multi-checkbox { border-color: var(--accent); background: var(--accent); color: #fff; }
+
+  /* ── Notes section (Part 4) ── */
+  .notes-box {
+    background: var(--gold-light);
+    border: 1px solid #e8d8a0;
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .notes-box h4 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+  }
+  .notes-box h5 {
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--gold);
+    margin: 12px 0 6px;
+  }
+  .bullet-list { list-style: none; margin-left: 0; }
+  .bullet-list > li {
+    padding: 5px 0 5px 16px;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    position: relative;
+    line-height: 1.55;
+  }
+  .bullet-list > li::before {
+    content: "•";
+    color: var(--gold);
+    position: absolute;
+    left: 0;
+  }
+  .sub-list { list-style: none; margin-left: 16px; margin-top: 4px; }
+  .sub-list li {
+    padding: 3px 0 3px 14px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    position: relative;
+  }
+  .sub-list li::before {
+    content: "–";
+    color: var(--text-muted);
+    position: absolute;
+    left: 0;
+  }
+
+  /* ── Q navigator ── */
+  .q-nav {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px 24px;
+    margin-top: 32px;
+    box-shadow: var(--shadow-sm);
+  }
+  .q-nav-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+  .q-nav-part {
+    margin-bottom: 14px;
+  }
+  .q-nav-part-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .q-nav-dots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .q-nav-dot {
+    width: 30px; height: 30px;
+    border-radius: 6px;
+    border: 1.5px solid var(--border);
+    background: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+  .q-nav-dot:hover { border-color: var(--accent); color: var(--accent); }
+  .q-nav-dot.answered { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
+
+  /* ── Submit area ── */
+  .submit-wrap {
+    text-align: center;
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+  .btn-submit {
+    padding: 12px 40px;
+    font-size: 0.95rem;
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s;
+    box-shadow: 0 2px 8px rgba(30,107,74,0.25);
+  }
+  .btn-submit:hover { background: var(--accent-hover); }
+
+  /* ── Results modal ── */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 200;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.2s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 36px 40px;
+    max-width: 420px; width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    transform: translateY(10px); transition: transform 0.2s;
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+  .modal-score {
+    font-family: 'Source Serif 4', serif;
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .modal-total { font-size: 1rem; color: var(--text-muted); margin-bottom: 16px; }
+  .modal-band {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .modal-close {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 9px 22px;
+    border-radius: var(--radius);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .modal-close:hover { background: var(--surface); border-color: var(--accent); color: var(--text-primary); }
+
+  /* ── Script modal (larger) ── */
+  .script-modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 300;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    padding: 20px;
+  }
+  .script-modal-overlay.open { opacity: 1; pointer-events: all; }
+  .script-modal {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    max-width: 820px; width: 100%;
+    max-height: 90vh;
+    display: flex; flex-direction: column;
+    box-shadow: 0 25px 70px rgba(0,0,0,0.25);
+    transform: translateY(15px); transition: transform 0.25s;
+    overflow: hidden;
+  }
+  .script-modal-overlay.open .script-modal { transform: translateY(0); }
+  .script-modal-header {
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fafaf8;
+    flex-shrink: 0;
+  }
+  .script-modal-header h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .script-modal-close-x {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--text-muted);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+  }
+  .script-modal-close-x:hover { background: var(--bg); color: var(--red); border-color: var(--red); }
+  .script-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    flex-shrink: 0;
+    padding: 0 20px;
+    gap: 4px;
+    overflow-x: auto;
+  }
+  .script-tab {
+    padding: 11px 18px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    border-bottom: 2.5px solid transparent;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .script-tab:hover { color: var(--text-primary); }
+  .script-tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    font-weight: 600;
+  }
+  .script-modal-body {
+    padding: 24px 28px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .script-pane { display: none; }
+  .script-pane.active { display: block; }
+
+  /* Answer key card */
+  .answer-row {
+    display: grid;
+    grid-template-columns: 48px 1fr 1fr;
+    gap: 12px;
+    padding: 10px 14px;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    margin-bottom: 8px;
+    align-items: center;
+    background: var(--surface);
+    transition: all 0.15s;
+  }
+  .answer-row.correct { border-color: var(--accent); background: var(--accent-light); }
+  .answer-row.incorrect { border-color: var(--red); background: var(--red-light); }
+  .answer-row.empty { border-color: var(--border); background: var(--bg); opacity: 0.75; }
+  .answer-q {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+  .answer-your, .answer-correct {
+    font-size: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .answer-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .answer-value { color: var(--text-primary); font-weight: 500; }
+  .answer-row.correct .answer-your .answer-value { color: var(--accent); }
+  .answer-row.incorrect .answer-your .answer-value { color: var(--red); text-decoration: line-through; }
+  .answer-row.correct .answer-correct .answer-value { color: var(--accent); font-weight: 600; }
+  .answer-row.incorrect .answer-correct .answer-value { color: var(--accent); font-weight: 600; }
+  .answer-value.empty-val { color: var(--text-muted); font-style: italic; }
+
+  /* Summary stats */
+  .summary-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--accent-light), #fff);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+  .stat-item { text-align: center; }
+  .stat-value {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-top: 2px;
+    font-weight: 500;
+  }
+  .stat-correct .stat-value { color: var(--accent); }
+  .stat-wrong .stat-value { color: var(--red); }
+  .stat-band .stat-value { color: var(--gold); }
+
+  /* Transcript styling */
+  .transcript-part {
+    margin-bottom: 28px;
+  }
+  .transcript-heading {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .transcript-text {
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    font-family: 'Source Serif 4', serif;
+  }
+  .transcript-text p { margin-bottom: 14px; }
+  .transcript-text .speaker {
+    font-weight: 600;
+    color: var(--accent);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-right: 4px;
+  }
+  .transcript-text .answer-word {
+    background: #fef3b8;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: 600;
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--gold);
+  }
+  .transcript-text .answer-word[data-q]::before {
+    content: attr(data-q);
+    background: var(--gold);
+    color: #fff;
+    font-size: 0.65rem;
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin-right: 4px;
+    font-family: 'Inter', sans-serif;
+    vertical-align: 1px;
+    font-weight: 700;
+  }
+  .placeholder-note {
+    padding: 14px 18px;
+    background: var(--blue-light);
+    border: 1px dashed #c8d9ee;
+    border-radius: var(--radius);
+    font-size: 0.82rem;
+    color: var(--blue);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  /* ── Highlight ── */
+  ::selection { background: #b8e0cf; }
+  .highlighted { background: #fef08a; border-radius: 2px; }
+  .highlight-mode * { cursor: text !important; }
+
+  @media (max-width: 600px) {
+    .header-inner { padding: 0 14px; }
+    .page-wrap { padding: 20px 14px 60px; }
+    .part-body { padding: 16px 14px; }
+    .header-title { font-size: 0.95rem; }
+    .drag-options-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="site-header">
+  <div class="header-inner">
+    <span class="header-title">IELTS Listening Practice Test</span>
+    <div class="header-actions">
+      <span class="progress-pill">Progress: <span id="progressCount">0</span>/40 answered</span>
+      <button class="btn btn-ghost" id="highlightBtn" onclick="toggleHighlight()">✎ Highlight</button>
+      <button class="btn btn-ghost" id="eraseBtn" onclick="eraseHighlights()">✕ Remove</button>
+      <button class="btn btn-primary" id="scriptBtn" onclick="openScript()">📄 Script & Answers</button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ MAIN ═══ -->
+<main class="page-wrap">
+
+  <div class="page-heading">
+    <h1>IELTS Listening – Full Practice Test</h1>
+    <p>Complete all 40 questions across 4 parts. Listen carefully to each recording.</p>
+  </div>
+
+  <!-- ════ PART 1 ════ -->
+  <section class="part-section">
+    <div class="part-header">
+      <span class="part-badge">Part 1</span>
+      <span class="part-range">Questions 1–10</span>
+    </div>
+    <div class="part-body">
+      <audio controls class="audio-block" id="audio1" style="width:100%;display:block">
+        <source src="part1.mp3" type="audio/mpeg">
+      </audio>
+
+      <p class="instruction">Complete the form below.<br><strong>Write NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer.</p>
+
+      <div class="form-table-wrap">
+        <div class="form-table-title">International Student Travel Agency</div>
+        <div class="form-table-subtitle">Enquiry Form</div>
+        <table class="form-table">
+          <tr><td>Name:</td><td class="static-val">Sarah Brown</td></tr>
+          <tr><td>Date of birth:</td><td><input type="text" class="ans-input" id="q1" placeholder="Q1" data-q="1" oninput="updateProgress()"></td></tr>
+          <tr><td>Address:</td><td class="static-val">21 Waverley Road, Radstone, RD4 6WV</td></tr>
+          <tr><td>Contact tel. no.:</td><td><input type="text" class="ans-input" id="q2" placeholder="Q2" data-q="2" oninput="updateProgress()"></td></tr>
+          <tr>
+            <td class="notes-cell">Notes:</td>
+            <td class="notes-cell">
+              <ul class="notes-list">
+                <li>wants to travel in <input type="text" class="ans-input" id="q3" placeholder="Q3" data-q="3" oninput="updateProgress()"> Europe</li>
+                <li>hopes to travel by <input type="text" class="ans-input" id="q4" placeholder="Q4" data-q="4" oninput="updateProgress()"></li>
+                <li>interested in working in a <input type="text" class="ans-input" id="q5" placeholder="Q5" data-q="5" oninput="updateProgress()"></li>
+                <li>recommended to consider an alternative e.g. <input type="text" class="ans-input" id="q6" placeholder="Q6" data-q="6" oninput="updateProgress()"> work</li>
+                <li>advised to buy a European <input type="text" class="ans-input" id="q7" placeholder="Q7" data-q="7" oninput="updateProgress()"> for travelling</li>
+                <li>given a <input type="text" class="ans-input" id="q8" placeholder="Q8" data-q="8" oninput="updateProgress()"> with accommodation details</li>
+                <li>agreed to take out <input type="text" class="ans-input" id="q9" placeholder="Q9" data-q="9" oninput="updateProgress()"> from the Agency</li>
+                <li>told to use an <input type="text" class="ans-input" id="q10" placeholder="Q10" data-q="10" oninput="updateProgress()"> for contacting people</li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ PART 2 ════ -->
+  <section class="part-section">
+    <div class="part-header">
+      <span class="part-badge">Part 2</span>
+      <span class="part-range">Questions 11–20</span>
+    </div>
+    <div class="part-body">
+      <audio controls class="audio-block" id="audio2" style="width:100%;display:block">
+        <source src="part2.mp3" type="audio/mpeg">
+      </audio>
+
+      <h2 class="section-title">Afternoon Tea</h2>
+
+      <p class="q-label">Questions 11–14 · Choose the correct letter, A, B or C</p>
+
+      <!-- Q11 -->
+      <div class="mcq-group" id="q11_group">
+        <div class="mcq-question"><span class="qnum">11</span> According to Claire, what makes the Emperor Hotel attractive to people?</div>
+        <div class="mcq-options">
+          <label class="mcq-option" onclick="selectMCQ(this, 'q11')"><input type="radio" name="q11"><span class="mcq-radio"></span><span class="opt-letter">A</span> the chance to see famous people</label>
+          <label class="mcq-option" onclick="selectMCQ(this, 'q11')"><input type="radio" name="q11"><span class="mcq-radio"></span><span class="opt-letter">B</span> the friendliness of the staff</label>
+          <label class="mcq-option" onclick="selectMCQ(this, 'q11')"><input type="radio" name="q11"><span class="mcq-radio"></span><span class="opt-letter">C</span> the luxury of the surroundings</label>
+        </div>
+      </div>
+      <!-- Q12 -->
+      <div class="mcq-group" id="q12_group">
+        <div class="mcq-question"><span class="qnum">12</span> The Emperor blend of tea is</div>
+        <div class="mcq-options">
+          <label class="mcq-option" onclick="selectMCQ(this, 'q12')"><input type="radio" name="q12"><span class="mcq-radio"></span><span class="opt-letter">A</span> known internationally.</label>
+          <label class="mcq-option" onclick="selectMCQ(this, 'q12')"><input type="radio" name="q12"><span class="mcq-radio"></span><span class="opt-letter">B</span> made for the hotel</label>
+          <label class="mcq-option" onclick="selectMCQ(this, 'q12')"><input type="radio" name="q12"><span class="mcq-radio"></span><span class="opt-letter">C</span> sold in only a few places</label>
+        </div>
+      </div>
+      <!-- Q13 -->
+      <div class="mcq-group" id="q13_group">
+        <div class="mcq-question"><span class="qnum">13</span> Why are the tea tables special?</div>
+        <div class="mcq-options">
+          <label class="mcq-option" onclick="selectMCQ(this, 'q13')"><input type="radio" name="q13"><span class="mcq-radio"></span><span class="opt-letter">A</span> They are covered with unusual cloths.</label>
+          <label class="mcq-option" onclick="selectMCQ(this, 'q13')"><input type="radio" name="q13"><span class="mcq-radio"></span><span class="opt-letter">B</span> They exactly match the chairs</label>
+          <label class="mcq-option" onclick="selectMCQ(this, 'q13')"><input type="radio" name="q13"><span class="mcq-radio"></span><span class="opt-letter">C</span> They are made from re-used flooring.</label>
+        </div>
+      </div>
+      <!-- Q14 -->
+      <div class="mcq-group" id="q14_group">
+        <div class="mcq-question"><span class="qnum">14</span> The cups and saucers that are used at the hotel</div>
+        <div class="mcq-options">
+          <label class="mcq-option" onclick="selectMCQ(this, 'q14')"><input type="radio" name="q14"><span class="mcq-radio"></span><span class="opt-letter">A</span> are from England.</label>
+          <label class="mcq-option" onclick="selectMCQ(this, 'q14')"><input type="radio" name="q14"><span class="mcq-radio"></span><span class="opt-letter">B</span> can be bought by customers</label>
+          <label class="mcq-option" onclick="selectMCQ(this, 'q14')"><input type="radio" name="q14"><span class="mcq-radio"></span><span class="opt-letter">C</span> have pictures of a king and queen</label>
+        </div>
+      </div>
+
+      <!-- Q15–20 tea parties -->
+      <p class="q-label">Questions 15–20 · Tea Parties Highlights</p>
+      <p class="instruction">What is the highlight of each of the following tea parties?<br>Choose <strong>SIX</strong> answers (A–H) and assign one letter to each tea party.</p>
+
+      <div class="drag-options-grid">
+        <div class="drag-chip" id="chip_A" onclick="selectChip('A')"><strong>A</strong> – enjoying local fruit</div>
+        <div class="drag-chip" id="chip_B" onclick="selectChip('B')"><strong>B</strong> – sampling warm foods</div>
+        <div class="drag-chip" id="chip_C" onclick="selectChip('C')"><strong>C</strong> – feeling like royalty</div>
+        <div class="drag-chip" id="chip_D" onclick="selectChip('D')"><strong>D</strong> – being in a garden</div>
+        <div class="drag-chip" id="chip_E" onclick="selectChip('E')"><strong>E</strong> – listening to music</div>
+        <div class="drag-chip" id="chip_F" onclick="selectChip('F')"><strong>F</strong> – finding out about previous guests</div>
+        <div class="drag-chip" id="chip_G" onclick="selectChip('G')"><strong>G</strong> – having a special cake</div>
+        <div class="drag-chip" id="chip_H" onclick="selectChip('H')"><strong>H</strong> – capturing happy memories</div>
+      </div>
+
+      <div class="tea-table-wrap">
+        <table class="tea-table">
+          <thead><tr><th>#</th><th>Tea Party</th><th>Highlight</th></tr></thead>
+          <tbody>
+            <tr><td>15</td><td>Playtime Tea</td><td><div class="drop-target" id="q15_row" onclick="assignChip('q15')">Click to assign</div></td></tr>
+            <tr><td>16</td><td>Bridal Tea</td><td><div class="drop-target" id="q16_row" onclick="assignChip('q16')">Click to assign</div></td></tr>
+            <tr><td>17</td><td>Summer Tea</td><td><div class="drop-target" id="q17_row" onclick="assignChip('q17')">Click to assign</div></td></tr>
+            <tr><td>18</td><td>Canadian Tea</td><td><div class="drop-target" id="q18_row" onclick="assignChip('q18')">Click to assign</div></td></tr>
+            <tr><td>19</td><td>Farmers' Tea</td><td><div class="drop-target" id="q19_row" onclick="assignChip('q19')">Click to assign</div></td></tr>
+            <tr><td>20</td><td>Seniors' Tea</td><td><div class="drop-target" id="q20_row" onclick="assignChip('q20')">Click to assign</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ PART 3 ════ -->
+  <section class="part-section">
+    <div class="part-header">
+      <span class="part-badge">Part 3</span>
+      <span class="part-range">Questions 21–30</span>
+    </div>
+    <div class="part-body">
+      <audio controls class="audio-block" id="audio3" style="width:100%;display:block">
+        <source src="part3.mp3" type="audio/mpeg">
+      </audio>
+
+      <h2 class="section-title">Forensic Linguistics</h2>
+
+      <p class="q-label">Questions 21–24 · Choose the correct letter, A, B or C</p>
+
+      <!-- Q21 -->
+      <div class="mcq-group" id="q21_group">
+        <div class="mcq-question"><span class="qnum">21</span> What do the students agree about defining forensic linguistics?</div>
+        <div class="mcq-options">
+          <label class="mcq-option" onclick="selectMCQ(this,'q21')"><input type="radio" name="q21"><span class="mcq-radio"></span><span class="opt-letter">A</span> The dictionary definition was not very useful.</label>
+          <label class="mcq-option" onclick="selectMCQ(this,'q21')"><input type="radio" name="q21"><span class="mcq-radio"></span><span class="opt-letter">B</span> They could provide an example of the kind of work involved.</label>
+          <label class="mcq-option" onclick="selectMCQ(this,'q21')"><input type="radio" name="q21"><span class="mcq-radio"></span><span class="opt-letter">C</span> They should read about the subject to see how it is described.</label>
+        </div>
+      </div>
+      <!-- Q22 -->
+      <div class="mcq-group" id="q22_group">
+        <div class="mcq-question"><span class="qnum">22</span> Jen thinks it will be difficult to analyse the voice recording because</div>
+        <div class="mcq-options">
+          <label class="mcq-option" onclick="selectMCQ(this,'q22')"><input type="radio" name="q22"><span class="mcq-radio"></span><span class="opt-letter">A</span> it is not of good quality.</label>
+          <label class="mcq-option" onclick="selectMCQ(this,'q22')"><input type="radio" name="q22"><span class="mcq-radio"></span><span class="opt-letter">B</span> the accent is difficult to understand.</label>
+          <label class="mcq-option" onclick="selectMCQ(this,'q22')"><input type="radio" name="q22"><span class="mcq-radio"></span><span class="opt-letter">C</span> she doesn't know if the speaker is male or female.</label>
+        </div>
+      </div>
+      <!-- Q23 -->
+      <div class="mcq-group" id="q23_row">
+        <div class="mcq-question"><span class="qnum">23</span> Why does Jen think that the 'suspect' might vary their voice patterns?</div>
+        <div class="mcq-options">
+          <label class="mcq-option" onclick="selectMCQ(this,'q23')"><input type="radio" name="q23"><span class="mcq-radio"></span><span class="opt-letter">A</span> because they're being recorded</label>
+          <label class="mcq-option" onclick="selectMCQ(this,'q23')"><input type="radio" name="q23"><span class="mcq-radio"></span><span class="opt-letter">B</span> because they've been told to</label>
+          <label class="mcq-option" onclick="selectMCQ(this,'q23')"><input type="radio" name="q23"><span class="mcq-radio"></span><span class="opt-letter">C</span> because they feel uncomfortable about their accent</label>
+        </div>
+      </div>
+      <!-- Q24 -->
+      <div class="mcq-group" id="q24_group">
+        <div class="mcq-question"><span class="qnum">24</span> What does Rob think about Jen's approach to study?</div>
+        <div class="mcq-options">
+          <label class="mcq-option" onclick="selectMCQ(this,'q24')"><input type="radio" name="q24"><span class="mcq-radio"></span><span class="opt-letter">A</span> She worries too much about her ability.</label>
+          <label class="mcq-option" onclick="selectMCQ(this,'q24')"><input type="radio" name="q24"><span class="mcq-radio"></span><span class="opt-letter">B</span> She often ignores the most important issues.</label>
+          <label class="mcq-option" onclick="selectMCQ(this,'q24')"><input type="radio" name="q24"><span class="mcq-radio"></span><span class="opt-letter">C</span> She has trouble getting started.</label>
+        </div>
+      </div>
+
+      <!-- Q25-26 -->
+      <div class="multi-select-group" id="g1">
+        <p class="q-label">Questions 25 and 26 · Which TWO books do Jen and Rob decide to get from the library?</p>
+        <div class="multi-count">Selected: <span id="g1Count">0</span>/2</div>
+        <div class="multi-option" onclick="selectMulti(this,'g1',2)"><span class="multi-checkbox">✓</span><span class="opt-letter">A</span> Voice Identification</div>
+        <div class="multi-option" onclick="selectMulti(this,'g1',2)"><span class="multi-checkbox">✓</span><span class="opt-letter">B</span> Modern Forensic Techniques</div>
+        <div class="multi-option" onclick="selectMulti(this,'g1',2)"><span class="multi-checkbox">✓</span><span class="opt-letter">C</span> Language and Crime</div>
+        <div class="multi-option" onclick="selectMulti(this,'g1',2)"><span class="multi-checkbox">✓</span><span class="opt-letter">D</span> Forensics Today</div>
+        <div class="multi-option" onclick="selectMulti(this,'g1',2)"><span class="multi-checkbox">✓</span><span class="opt-letter">E</span> Research Methods in Forensic Linguistics</div>
+      </div>
+
+      <!-- Q27-28 -->
+      <div class="multi-select-group" id="g2">
+        <p class="q-label">Questions 27 and 28 · Which TWO practical considerations are both Jen and Rob concerned about?</p>
+        <div class="multi-count">Selected: <span id="g2Count">0</span>/2</div>
+        <div class="multi-option" onclick="selectMulti(this,'g2',2)"><span class="multi-checkbox">✓</span><span class="opt-letter">A</span> how much time they have for writing up the project</div>
+        <div class="multi-option" onclick="selectMulti(this,'g2',2)"><span class="multi-checkbox">✓</span><span class="opt-letter">B</span> being able to do enough research</div>
+        <div class="multi-option" onclick="selectMulti(this,'g2',2)"><span class="multi-checkbox">✓</span><span class="opt-letter">C</span> only speaking to the 'suspect' once</div>
+        <div class="multi-option" onclick="selectMulti(this,'g2',2)"><span class="multi-checkbox">✓</span><span class="opt-letter">D</span> using recording equipment</div>
+        <div class="multi-option" onclick="selectMulti(this,'g2',2)"><span class="multi-checkbox">✓</span><span class="opt-letter">E</span> how easy it will be to contact the 'suspect'</div>
+      </div>
+
+      <!-- Q29-30 -->
+      <div class="multi-select-group" id="g3">
+        <p class="q-label">Questions 29 and 30 · Which TWO sections of the project will Rob write alone?</p>
+        <div class="multi-count">Selected: <span id="g3Count">0</span>/2</div>
+        <div class="multi-option" onclick="selectMulti(this,'g3',2)"><span class="multi-checkbox">✓</span><span class="opt-letter">A</span> Methodology</div>
+        <div class="multi-option" onclick="selectMulti(this,'g3',2)"><span class="multi-checkbox">✓</span><span class="opt-letter">B</span> Literature review</div>
+        <div class="multi-option" onclick="selectMulti(this,'g3',2)"><span class="multi-checkbox">✓</span><span class="opt-letter">C</span> Introduction</div>
+        <div class="multi-option" onclick="selectMulti(this,'g3',2)"><span class="multi-checkbox">✓</span><span class="opt-letter">D</span> Analysis</div>
+        <div class="multi-option" onclick="selectMulti(this,'g3',2)"><span class="multi-checkbox">✓</span><span class="opt-letter">E</span> Discussion and conclusions</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ PART 4 ════ -->
+  <section class="part-section">
+    <div class="part-header">
+      <span class="part-badge">Part 4</span>
+      <span class="part-range">Questions 31–40</span>
+    </div>
+    <div class="part-body">
+      <audio controls class="audio-block" id="audio4" style="width:100%;display:block">
+        <source src="part4.mp3" type="audio/mpeg">
+      </audio>
+
+      <p class="instruction">Complete the notes below. <strong>Write NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer.</p>
+
+      <div class="notes-box">
+        <h4>Stone Age Man in Japan</h4>
+        <h5>Evidence</h5>
+        <ul class="bullet-list">
+          <li><strong>1877 Omori</strong>
+            <ul class="sub-list">
+              <li>Zoologist found pieces of pottery with an unusual pattern</li>
+            </ul>
+          </li>
+          <li><strong>1960s Fukui cave</strong>
+            <ul class="sub-list">
+              <li>Same style of pottery dated from about <input type="text" class="ans-input" id="q31" placeholder="Q31" data-q="31" oninput="updateProgress()"> BC</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h5>35,000 to 30,000 BC</h5>
+        <ul class="bullet-list">
+          <li>People used a <input type="text" class="ans-input" id="q32" placeholder="Q32" data-q="32" oninput="updateProgress()"> to get into Japan</li>
+          <li>Higher temperatures resulted in:
+            <ul class="sub-list">
+              <li>growth of <input type="text" class="ans-input" id="q33" placeholder="Q33" data-q="33" oninput="updateProgress()"></li>
+              <li>new animal species</li>
+              <li>use of <input type="text" class="ans-input" id="q34" placeholder="Q34" data-q="34" oninput="updateProgress()"> as weapons</li>
+              <li>availability of plants <input type="text" class="ans-input" id="q35" placeholder="Q35" data-q="35" oninput="updateProgress()"> and fish</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h5>10,500 to 8,000 BC (early Jomon period)</h5>
+        <ul class="bullet-list">
+          <li>old theory: people who were hunters didn't make or use pottery</li>
+          <li>present belief: pottery making was invented by Jomon hunters before development of agriculture</li>
+        </ul>
+
+        <h5>8,000 to 5,000 BC (later Jomon period)</h5>
+        <ul class="bullet-list">
+          <li>Jomon people were:
+            <ul class="sub-list">
+              <li>staying in one place for longer</li>
+              <li>not living in caves but in <input type="text" class="ans-input" id="q36" placeholder="Q36" data-q="36" oninput="updateProgress()"></li>
+              <li>using pairs of <input type="text" class="ans-input" id="q37" placeholder="Q37" data-q="37" oninput="updateProgress()"></li>
+            </ul>
+          </li>
+          <li>Sedentary lifestyle led to rise in <input type="text" class="ans-input" id="q38" placeholder="Q38" data-q="38" oninput="updateProgress()"></li>
+        </ul>
+
+        <h5>End of Jomon period</h5>
+        <ul class="bullet-list">
+          <li>Migrants introduced:
+            <ul class="sub-list">
+              <li>developments in manufacture of textiles and glass</li>
+              <li>new traditions for <input type="text" class="ans-input" id="q39" placeholder="Q39" data-q="39" oninput="updateProgress()"> ceremonies</li>
+              <li>new architecture</li>
+            </ul>
+          </li>
+          <li>Main crop grown was <input type="text" class="ans-input" id="q40" placeholder="Q40" data-q="40" oninput="updateProgress()"></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Q Navigator ════ -->
+  <div class="q-nav">
+    <div class="q-nav-title">Question Navigator</div>
+    <div class="q-nav-part">
+      <div class="q-nav-part-label">Part 1</div>
+      <div class="q-nav-dots" id="nav1"></div>
+    </div>
+    <div class="q-nav-part">
+      <div class="q-nav-part-label">Part 2</div>
+      <div class="q-nav-dots" id="nav2"></div>
+    </div>
+    <div class="q-nav-part">
+      <div class="q-nav-part-label">Part 3</div>
+      <div class="q-nav-dots" id="nav3"></div>
+    </div>
+    <div class="q-nav-part">
+      <div class="q-nav-part-label">Part 4</div>
+      <div class="q-nav-dots" id="nav4"></div>
+    </div>
+  </div>
+
+  <!-- ════ Submit ════ -->
+  <div class="submit-wrap">
+    <button class="btn-submit" onclick="submitAnswers()">Submit Answers</button>
+  </div>
+
+</main>
+
+<!-- Results modal -->
+<div class="modal-overlay" id="resultsModal">
+  <div class="modal">
+    <div style="font-size:2rem;margin-bottom:8px">🎯</div>
+    <div class="modal-score" id="modalScore">–</div>
+    <div class="modal-total">out of 40</div>
+    <div class="modal-band" id="modalBand">Estimated Band –</div>
+    <br>
+    <button class="modal-close" onclick="openScriptFromResults()" style="background:var(--accent);color:#fff;border-color:var(--accent);margin-right:8px">📄 Review Answers &amp; Script</button>
+    <button class="modal-close" onclick="closeModal()">✕ Close</button>
+  </div>
+</div>
+
+<!-- Script & Answers modal -->
+<div class="script-modal-overlay" id="scriptModal">
+  <div class="script-modal">
+    <div class="script-modal-header">
+      <h2>📄 Listening Script &amp; Answer Key</h2>
+      <button class="script-modal-close-x" onclick="closeScript()">✕</button>
+    </div>
+    <div class="script-tabs">
+      <button class="script-tab active" onclick="switchTab('answers')">Answer Key</button>
+      <button class="script-tab" onclick="switchTab('p1')">Part 1 Script</button>
+      <button class="script-tab" onclick="switchTab('p2')">Part 2 Script</button>
+      <button class="script-tab" onclick="switchTab('p3')">Part 3 Script</button>
+      <button class="script-tab" onclick="switchTab('p4')">Part 4 Script</button>
+    </div>
+    <div class="script-modal-body">
+
+      <!-- Answers tab -->
+      <div class="script-pane active" id="pane-answers">
+        <div class="summary-stats" id="summaryStats">
+          <div class="stat-item stat-correct"><div class="stat-value" id="statCorrect">0</div><div class="stat-label">Correct</div></div>
+          <div class="stat-item stat-wrong"><div class="stat-value" id="statWrong">0</div><div class="stat-label">Incorrect</div></div>
+          <div class="stat-item stat-band"><div class="stat-value" id="statBand">–</div><div class="stat-label">Est. Band</div></div>
+        </div>
+        <div id="answerRows"></div>
+      </div>
+
+      <!-- Script panes -->
+      <div class="script-pane" id="pane-p1">
+        <div class="placeholder-note">ℹ️ This is placeholder transcript text. Replace the content inside <code>scripts.p1</code> in the JavaScript section below with the real audio transcript. Wrap each answer word with <code>&lt;span class="answer-word" data-q="1"&gt;answer&lt;/span&gt;</code> to highlight it.</div>
+        <div class="transcript-part">
+          <div class="transcript-heading">Part 1 — International Student Travel Agency</div>
+          <div class="transcript-text" id="transcript-p1"></div>
+        </div>
+      </div>
+      <div class="script-pane" id="pane-p2">
+        <div class="placeholder-note">ℹ️ Placeholder transcript. Replace <code>scripts.p2</code> with the real text.</div>
+        <div class="transcript-part">
+          <div class="transcript-heading">Part 2 — Afternoon Tea</div>
+          <div class="transcript-text" id="transcript-p2"></div>
+        </div>
+      </div>
+      <div class="script-pane" id="pane-p3">
+        <div class="placeholder-note">ℹ️ Placeholder transcript. Replace <code>scripts.p3</code> with the real text.</div>
+        <div class="transcript-part">
+          <div class="transcript-heading">Part 3 — Forensic Linguistics</div>
+          <div class="transcript-text" id="transcript-p3"></div>
+        </div>
+      </div>
+      <div class="script-pane" id="pane-p4">
+        <div class="placeholder-note">ℹ️ Placeholder transcript. Replace <code>scripts.p4</code> with the real text.</div>
+        <div class="transcript-part">
+          <div class="transcript-heading">Part 4 — Stone Age Man in Japan</div>
+          <div class="transcript-text" id="transcript-p4"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// ║ CORRECT ANSWERS — Real IELTS Exam 8 May 2025 Uzbekistan       ║
+// ║ Sources: tutorlistening.com + ieltsxpress.com                 ║
+// ║ (Part 2 answers are estimated — verify with audio)            ║
+// ═══════════════════════════════════════════════════════════════
+const correctAnswers = {
+  // Part 1 — International Student Travel Agency
+  1:  "30th March 1988",     // also: "March 30th 1988", "March 30 1988"
+  2:  "0903775115",
+  3:  "Northern",
+  4:  "train",
+  5:  "hotel",
+  6:  "farm",
+  7:  "pass",
+  8:  "booklet",
+  9:  "insurance",
+  10: "internet cafe",
+
+  // Part 2 — Afternoon Tea at Emperor Hotel (best estimates)
+  11: "C",   // luxury of the surroundings
+  12: "B",   // made for the hotel
+  13: "C",   // made from re-used flooring
+  14: "A",   // from England
+  15: "G",   // Playtime Tea — having a special cake
+  16: "C",   // Bridal Tea — feeling like royalty
+  17: "D",   // Summer Tea — being in a garden
+  18: "A",   // Canadian Tea — enjoying local fruit
+  19: "B",   // Farmers' Tea — sampling warm foods
+  20: "F",   // Seniors' Tea — finding out about previous guests
+
+  // Part 3 — Forensic Linguistics (confirmed)
+  21: "B",
+  22: "A",
+  23: "B",
+  24: "A",
+  25: ["B","E"],   // Q25 & Q26
+  27: ["A","D"],   // Q27 & Q28
+  29: ["C","E"],   // Q29 & Q30
+
+  // Part 4 — Stone Age Man in Japan (confirmed)
+  31: "10,000",
+  32: "land bridge",
+  33: "forests",
+  34: "arrows",
+  35: "nuts",
+  36: "villages",
+  37: "stones",
+  38: "population",
+  39: "marriage",
+  40: "rice"
+};
+
+// Replace placeholder transcript text with actual audio script.
+// Wrap answer words with: <span class="answer-word" data-q="N">word</span>
+const scripts = {
+  p1: `
+    <p><span class="speaker">Agent:</span> Good morning, International Student Travel Agency, how can I help you?</p>
+    <p><span class="speaker">Sarah:</span> Hi. My name's Sarah Brown and I'm interested in finding out about travel and work opportunities.</p>
+    <p><span class="speaker">Agent:</span> That's right. We can help you arrange your travel and set up a job for you. But first of all, I need some personal details. Okay, your full name?</p>
+    <p><span class="speaker">Sarah:</span> Sarah Brown.</p>
+    <p><span class="speaker">Agent:</span> Date of birth?</p>
+    <p><span class="speaker">Sarah:</span> March the <span class="answer-word" data-q="1">30th, 1988</span>.</p>
+    <p><span class="speaker">Agent:</span> And your address?</p>
+    <p><span class="speaker">Sarah:</span> 21 Waverley Road, Radstone, RD4 6WV.</p>
+    <p><span class="speaker">Agent:</span> And a contact telephone number?</p>
+    <p><span class="speaker">Sarah:</span> Yes, it's <span class="answer-word" data-q="2">0903775115</span>.</p>
+    <p><span class="speaker">Agent:</span> Right, thank you. Now, which part of Europe were you thinking of going to?</p>
+    <p><span class="speaker">Sarah:</span> Well, I'd quite like to travel in <span class="answer-word" data-q="3">Northern</span> Europe — places like Sweden, Norway, Denmark.</p>
+    <p><span class="speaker">Agent:</span> And how were you hoping to travel between places?</p>
+    <p><span class="speaker">Sarah:</span> I was hoping to go by <span class="answer-word" data-q="4">train</span>, actually. I don't really like flying short distances.</p>
+    <p><span class="speaker">Agent:</span> Good choice. And what kind of work were you interested in?</p>
+    <p><span class="speaker">Sarah:</span> I was thinking of working in a <span class="answer-word" data-q="5">hotel</span> — maybe as a receptionist or in the restaurant.</p>
+    <p><span class="speaker">Agent:</span> Okay. Hotel work is available, but if you wanted something different, we could also consider <span class="answer-word" data-q="6">farm</span> work — it's a great way to meet people and pays reasonably well.</p>
+    <p><span class="speaker">Sarah:</span> Oh, interesting. I'll think about that.</p>
+    <p><span class="speaker">Agent:</span> Good. For travel, I'd strongly recommend buying a European rail <span class="answer-word" data-q="7">pass</span> — it gives you unlimited travel between countries for a fixed price.</p>
+    <p><span class="speaker">Sarah:</span> That sounds perfect.</p>
+    <p><span class="speaker">Agent:</span> I'll give you this <span class="answer-word" data-q="8">booklet</span>, which has all the details of accommodation options in each country.</p>
+    <p><span class="speaker">Sarah:</span> Thanks.</p>
+    <p><span class="speaker">Agent:</span> Also, we strongly advise taking out travel <span class="answer-word" data-q="9">insurance</span> from the Agency before you go.</p>
+    <p><span class="speaker">Sarah:</span> Yes, definitely.</p>
+    <p><span class="speaker">Agent:</span> And the best way to stay in touch with friends and family while travelling is to use an <span class="answer-word" data-q="10">internet cafe</span> — they're available in almost every town.</p>
+    <p><span class="speaker">Sarah:</span> Perfect, thanks for all your help.</p>
+  `,
+  p2: `
+    <p><em>⚠️ Note: Part 2 full transcript is not publicly available. Below are the likely answer patterns based on the question structure.</em></p>
+    <p><span class="speaker">Presenter:</span> Welcome to our feature on Afternoon Tea. I'm joined today by Claire, the manager of the famous Emperor Hotel, which is renowned for its traditional afternoon tea service.</p>
+    <p><span class="speaker">Claire:</span> Many people visit us hoping to spot celebrities or enjoy our friendly staff, but what really draws guests in is the sheer <span class="answer-word" data-q="11">luxury of the surroundings</span> — the grand architecture, the chandeliers, the elegance of every detail.</p>
+    <p><span class="speaker">Presenter:</span> I've heard about your famous Emperor blend of tea.</p>
+    <p><span class="speaker">Claire:</span> Yes — it's <span class="answer-word" data-q="12">specially blended for our hotel</span>. It's not sold commercially, only served here.</p>
+    <p><span class="speaker">Presenter:</span> And your tea tables are quite unique too.</p>
+    <p><span class="speaker">Claire:</span> They're made from <span class="answer-word" data-q="13">re-used flooring</span> — old wooden floorboards from the hotel's original construction. A lovely touch of history.</p>
+    <p><span class="speaker">Presenter:</span> What about the cups and saucers?</p>
+    <p><span class="speaker">Claire:</span> All of our china is imported from <span class="answer-word" data-q="14">England</span> — the finest bone china.</p>
+    <p>[<em>Tea party highlights section — Q15–Q20:</em>]</p>
+    <p><span class="speaker">Claire:</span> Our <strong>Playtime Tea</strong> features a <span class="answer-word" data-q="15">special cake (G)</span> for children. The <strong>Bridal Tea</strong> makes brides feel like <span class="answer-word" data-q="16">royalty (C)</span>. <strong>Summer Tea</strong> is held in our beautiful <span class="answer-word" data-q="17">garden (D)</span>. For <strong>Canadian Tea</strong>, we feature <span class="answer-word" data-q="18">local fruit (A)</span> from British Columbia. The <strong>Farmers' Tea</strong> focuses on <span class="answer-word" data-q="19">warm savoury foods (B)</span>. And our <strong>Seniors' Tea</strong> includes stories and photos of <span class="answer-word" data-q="20">previous famous guests (F)</span>.</p>
+  `,
+  p3: `
+    <p><span class="speaker">Rob:</span> Hi Jen.</p>
+    <p><span class="speaker">Jen:</span> Hi Rob. We need to look at this project we're doing together in forensic linguistics.</p>
+    <p><span class="speaker">Rob:</span> Sure. The first thing we have to do is define forensic linguistics. I thought we could say something like: linguistics involves the analysis of language, and forensic refers to using scientific techniques to solve crimes. So forensic linguistics involves analysing language as part of a criminal investigation.</p>
+    <p><span class="speaker">Jen:</span> That sounds good. Actually, <span class="answer-word" data-q="21">I think we'd be better giving a real-life example of the kind of work forensic linguists do</span> — it'll be more engaging than just a dictionary definition.</p>
+    <p><span class="speaker">Rob:</span> Good idea. Okay, let's talk about the voice recording they gave us to analyse.</p>
+    <p><span class="speaker">Jen:</span> Right. The main issue is that <span class="answer-word" data-q="22">the recording quality is really poor</span> — there's a lot of background noise.</p>
+    <p><span class="speaker">Rob:</span> The accent seems clear enough though.</p>
+    <p><span class="speaker">Jen:</span> Yes, and you can tell it's a male voice. But what worries me is that the suspect might be deliberately changing their voice patterns — <span class="answer-word" data-q="23">because they've been asked specifically to record themselves for this</span>, they'll be self-conscious and won't speak naturally.</p>
+    <p><span class="speaker">Rob:</span> That's a fair point. You know, Jen, you really overthink these things. <span class="answer-word" data-q="24">You worry too much about whether you can actually do it</span> — you're always capable once you start.</p>
+    <p>[<em>Library books discussion Q25–Q26:</em>]</p>
+    <p><span class="speaker">Jen:</span> Which books should we get from the library?</p>
+    <p><span class="speaker">Rob:</span> Let's get <span class="answer-word" data-q="25">Modern Forensic Techniques (B)</span> and <span class="answer-word" data-q="25">Research Methods in Forensic Linguistics (E)</span>.</p>
+    <p>[<em>Practical considerations Q27–Q28:</em>]</p>
+    <p>Both students are concerned about <span class="answer-word" data-q="27">how much time they have for writing up (A)</span> and <span class="answer-word" data-q="27">using recording equipment properly (D)</span>.</p>
+    <p>[<em>Sections Rob will write alone Q29–Q30:</em>]</p>
+    <p>Rob will write the <span class="answer-word" data-q="29">Introduction (C)</span> and <span class="answer-word" data-q="29">Discussion and conclusions (E)</span> alone.</p>
+  `,
+  p4: `
+    <p><span class="speaker">Lecturer:</span> Today we're looking at the evidence for Stone Age man in Japan. In 1877, at Omori, a zoologist named Edward Morse discovered pieces of pottery with an unusual pattern — marks made by pressing cords into the wet clay. This pottery came to be known as Jomon pottery, from the Japanese word for "cord-marked."</p>
+    <p>Then in the 1960s, at Fukui cave, more examples of the same style of pottery were found, dated from about <span class="answer-word" data-q="31">10,000</span> BC — making them among the oldest known pottery in the world.</p>
+    <p>Let's go back further. Between 35,000 and 30,000 BC, during the last Ice Age, sea levels were much lower and people were able to use a <span class="answer-word" data-q="32">land bridge</span> to cross over into Japan from the Asian mainland.</p>
+    <p>As temperatures rose at the end of the Ice Age, the environment changed dramatically. There was a rapid growth of <span class="answer-word" data-q="33">forests</span>, which completely transformed the landscape. New animal species appeared — smaller mammals like the Sika deer replaced the large Ice Age mammals.</p>
+    <p>For hunting these smaller, faster animals, people began using <span class="answer-word" data-q="34">arrows</span> as weapons — a significant technological shift. They also had access to a wider range of food, including plants, <span class="answer-word" data-q="35">nuts</span>, and fish from the surrounding seas.</p>
+    <p>During the early Jomon period, from 10,500 to 8,000 BC, the old theory was that hunter-gatherers didn't make pottery. But the evidence from Japan overturned this — the present belief is that pottery making was actually invented by Jomon hunters, before the development of agriculture.</p>
+    <p>In the later Jomon period, from 8,000 to 5,000 BC, we see major lifestyle changes. The Jomon people were staying in one place for longer periods. They were no longer living in caves, but in <span class="answer-word" data-q="36">villages</span> of pit dwellings. They also started using pairs of <span class="answer-word" data-q="37">stones</span> as grinding tools to process food.</p>
+    <p>This more sedentary lifestyle led to a rise in <span class="answer-word" data-q="38">population</span> — because staying in one place meant better food storage and shorter intervals between births.</p>
+    <p>At the end of the Jomon period, migrants from mainland Asia arrived and introduced major innovations: advances in textile and glass manufacture, new traditions for <span class="answer-word" data-q="39">marriage</span> ceremonies, and new architectural styles. And the main crop these migrants brought and cultivated was <span class="answer-word" data-q="40">rice</span>, which became central to Japanese civilisation.</p>
+  `
+};
+// ═══════════════════════════════════════════════════════════════
+
+// Populate transcripts on load
+function loadTranscripts() {
+  document.getElementById('transcript-p1').innerHTML = scripts.p1;
+  document.getElementById('transcript-p2').innerHTML = scripts.p2;
+  document.getElementById('transcript-p3').innerHTML = scripts.p3;
+  document.getElementById('transcript-p4').innerHTML = scripts.p4;
+}
+loadTranscripts();
+
+// ── Script modal controls ──
+function openScript() {
+  buildAnswerKey();
+  document.getElementById('scriptModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeScript() {
+  document.getElementById('scriptModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function switchTab(id) {
+  document.querySelectorAll('.script-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.script-pane').forEach(p => p.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  document.getElementById(`pane-${id}`).classList.add('active');
+}
+
+// ── Collect user answers ──
+function getUserAnswers() {
+  const ua = {};
+  // Text inputs
+  document.querySelectorAll('input[data-q]').forEach(inp => {
+    const q = parseInt(inp.dataset.q);
+    ua[q] = inp.value.trim();
+  });
+  // MCQ
+  for (let i = 11; i <= 24; i++) {
+    const sel = document.querySelector(`[name="q${i}"]:checked`);
+    if (sel) ua[i] = sel.closest('.mcq-option').querySelector('.opt-letter').textContent;
+  }
+  // Tea (Q15-20)
+  [15,16,17,18,19,20].forEach(q => { if (teaAnswers[q]) ua[q] = teaAnswers[q]; });
+  // Multi (Q25-30)
+  if (multiAnswers.g1.length) ua[25] = [...multiAnswers.g1].sort();
+  if (multiAnswers.g2.length) ua[27] = [...multiAnswers.g2].sort();
+  if (multiAnswers.g3.length) ua[29] = [...multiAnswers.g3].sort();
+  return ua;
+}
+
+// ── Check if an answer is correct ──
+function isCorrect(userAns, correct) {
+  if (userAns === undefined || userAns === null || userAns === '') return false;
+  if (Array.isArray(correct)) {
+    if (!Array.isArray(userAns)) return false;
+    if (userAns.length !== correct.length) return false;
+    const sortedC = [...correct].sort();
+    const sortedU = [...userAns].sort();
+    return sortedC.every((v, i) => v === sortedU[i]);
+  }
+  if (typeof correct === 'string') {
+    return userAns.toString().trim().toLowerCase() === correct.toString().trim().toLowerCase();
+  }
+  return false;
+}
+
+// ── Build answer key table ──
+function buildAnswerKey() {
+  const ua = getUserAnswers();
+  const container = document.getElementById('answerRows');
+  container.innerHTML = '';
+  let correctCount = 0;
+  let wrongCount = 0;
+
+  // Build rows for Q1–Q40, handling multi-answer groups
+  const rendered = new Set();
+  for (let q = 1; q <= 40; q++) {
+    if (rendered.has(q)) continue;
+
+    let displayLabel = `Q${q}`;
+    let userVal = ua[q];
+    let correctVal = correctAnswers[q];
+
+    // Multi-answer groups
+    if (q === 25) { displayLabel = 'Q25–26'; rendered.add(26); }
+    else if (q === 27) { displayLabel = 'Q27–28'; rendered.add(28); }
+    else if (q === 29) { displayLabel = 'Q29–30'; rendered.add(30); }
+    else if (q === 26 || q === 28 || q === 30) continue;
+
+    const hasAnswer = userVal !== undefined && userVal !== '' && !(Array.isArray(userVal) && userVal.length === 0);
+    const correct = hasAnswer && isCorrect(userVal, correctVal);
+
+    let statusClass = !hasAnswer ? 'empty' : (correct ? 'correct' : 'incorrect');
+    if (correct) correctCount += (Array.isArray(correctVal) ? correctVal.length : 1);
+    else if (hasAnswer) wrongCount += (Array.isArray(correctVal) ? correctVal.length : 1);
+
+    // Handle partial correct for multi
+    if (Array.isArray(correctVal) && Array.isArray(userVal)) {
+      const matches = userVal.filter(v => correctVal.includes(v)).length;
+      if (matches > 0 && matches < correctVal.length) {
+        statusClass = 'incorrect';
+        correctCount += matches;
+        wrongCount += (correctVal.length - matches);
+      } else if (matches === correctVal.length) {
+        // Already counted above
+      }
+    }
+
+    const userDisplay = hasAnswer
+      ? (Array.isArray(userVal) ? userVal.join(', ') : userVal)
+      : '<span class="empty-val">— not answered —</span>';
+    const correctDisplay = Array.isArray(correctVal) ? correctVal.join(', ') : correctVal;
+
+    const row = document.createElement('div');
+    row.className = `answer-row ${statusClass}`;
+    row.innerHTML = `
+      <div class="answer-q">${displayLabel}</div>
+      <div class="answer-your">
+        <div class="answer-label">Your answer</div>
+        <div class="answer-value">${userDisplay}</div>
+      </div>
+      <div class="answer-correct">
+        <div class="answer-label">Correct answer</div>
+        <div class="answer-value">${correctDisplay}</div>
+      </div>
+    `;
+    container.appendChild(row);
+  }
+
+  // Mark correct/incorrect on the input fields themselves
+  document.querySelectorAll('input[data-q]').forEach(inp => {
+    const q = parseInt(inp.dataset.q);
+    inp.classList.remove('correct', 'incorrect');
+    if (inp.value.trim()) {
+      inp.classList.add(isCorrect(inp.value.trim(), correctAnswers[q]) ? 'correct' : 'incorrect');
+    }
+  });
+
+  // Update stats
+  document.getElementById('statCorrect').textContent = correctCount;
+  document.getElementById('statWrong').textContent = wrongCount;
+  let band = '–';
+  if (correctCount >= 39) band = '9.0';
+  else if (correctCount >= 37) band = '8.5';
+  else if (correctCount >= 35) band = '8.0';
+  else if (correctCount >= 32) band = '7.5';
+  else if (correctCount >= 30) band = '7.0';
+  else if (correctCount >= 26) band = '6.5';
+  else if (correctCount >= 23) band = '6.0';
+  else if (correctCount >= 18) band = '5.5';
+  else if (correctCount >= 16) band = '5.0';
+  else if (correctCount > 0) band = '<5';
+  document.getElementById('statBand').textContent = band;
+}
+
+// Close modal on Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') { closeScript(); closeModal(); }
+});
+// Close on overlay click
+document.getElementById('scriptModal').addEventListener('click', (e) => {
+  if (e.target.id === 'scriptModal') closeScript();
+});
+let highlightMode = false;
+let selectedChip = null;
+const answers = {};
+const teaAnswers = {};
+const multiAnswers = { g1: [], g2: [], g3: [] };
+
+// ── Build nav dots ──
+function buildNav() {
+  const parts = { nav1:[1,10], nav2:[11,20], nav3:[21,30], nav4:[31,40] };
+  for (const [id, [start, end]] of Object.entries(parts)) {
+    const el = document.getElementById(id);
+    for (let i = start; i <= end; i++) {
+      const a = document.createElement('a');
+      a.className = 'q-nav-dot';
+      a.id = `nav_q${i}`;
+      a.textContent = i;
+      a.href = `#q${i}`;
+      el.appendChild(a);
+    }
+  }
+}
+buildNav();
+
+// ── MCQ ──
+function selectMCQ(el, name) {
+  document.querySelectorAll(`[name="${name}"]`).forEach(r => r.closest('.mcq-option').classList.remove('selected'));
+  el.classList.add('selected');
+  el.querySelector('input').checked = true;
+  const qNum = parseInt(name.replace('q',''));
+  answers[qNum] = el.querySelector('.opt-letter').textContent;
+  markNav(qNum, true);
+  updateProgress();
+}
+
+// ── Chip assign ──
+function selectChip(letter) {
+  if (selectedChip === letter) { selectedChip = null; document.querySelectorAll('.drag-chip').forEach(c=>c.style.outline=''); return; }
+  selectedChip = letter;
+  document.querySelectorAll('.drag-chip').forEach(c => c.style.outline = '');
+  document.getElementById(`chip_${letter}`).style.outline = '2px solid var(--accent)';
+}
+function assignChip(qId) {
+  if (!selectedChip) return;
+  const qNum = parseInt(qId.replace('q',''));
+  // Remove previous assignment
+  if (teaAnswers[qNum]) {
+    const old = teaAnswers[qNum];
+    document.getElementById(`chip_${old}`).classList.remove('used');
+    document.getElementById(`chip_${old}`).style.opacity = '';
+  }
+  teaAnswers[qNum] = selectedChip;
+  const chip = document.getElementById(`chip_${selectedChip}`);
+  chip.classList.add('used');
+  chip.style.outline = '';
+  const target = document.getElementById(`${qId}_row`);
+  target.classList.add('filled');
+  const label = chip.textContent;
+  target.innerHTML = `<strong>${selectedChip}</strong> – ${label.slice(2)} <span class="clear-btn" onclick="clearChip('${qId}', event)">✕</span>`;
+  selectedChip = null;
+  document.querySelectorAll('.drag-chip').forEach(c=>c.style.outline='');
+  markNav(qNum, true);
+  updateProgress();
+}
+function clearChip(qId, e) {
+  e.stopPropagation();
+  const qNum = parseInt(qId.replace('q',''));
+  if (teaAnswers[qNum]) {
+    document.getElementById(`chip_${teaAnswers[qNum]}`).classList.remove('used');
+    delete teaAnswers[qNum];
+  }
+  const target = document.getElementById(`${qId}_row`);
+  target.classList.remove('filled');
+  target.textContent = 'Click to assign';
+  markNav(qNum, false);
+  updateProgress();
+}
+
+// ── Multi select ──
+function selectMulti(el, groupId, max) {
+  const isSelected = el.classList.contains('selected');
+  if (!isSelected && multiAnswers[groupId].length >= max) return;
+  el.classList.toggle('selected');
+  const letter = el.querySelector('.opt-letter').textContent;
+  if (el.classList.contains('selected')) {
+    multiAnswers[groupId].push(letter);
+  } else {
+    multiAnswers[groupId] = multiAnswers[groupId].filter(l => l !== letter);
+  }
+  document.getElementById(`${groupId}Count`).textContent = multiAnswers[groupId].length;
+  // update nav
+  const ranges = { g1:[25,26], g2:[27,28], g3:[29,30] };
+  const [start, end] = ranges[groupId];
+  const count = multiAnswers[groupId].length;
+  markNav(start, count >= 1);
+  markNav(end, count >= 2);
+  updateProgress();
+}
+
+// ── Progress ──
+function updateProgress() {
+  let count = 0;
+  // Text inputs
+  document.querySelectorAll('input[data-q]').forEach(inp => {
+    if (inp.value.trim()) { count++; markNav(parseInt(inp.dataset.q), true); }
+    else markNav(parseInt(inp.dataset.q), false);
+  });
+  // MCQ
+  for (let i = 11; i <= 24; i++) {
+    if (document.querySelector(`[name="q${i}"]:checked`)) count++;
+  }
+  // Tea
+  count += Object.keys(teaAnswers).length;
+  // Multi
+  count += Math.min(multiAnswers.g1.length, 2) + Math.min(multiAnswers.g2.length, 2) + Math.min(multiAnswers.g3.length, 2);
+  document.getElementById('progressCount').textContent = count;
+}
+function markNav(q, done) {
+  const el = document.getElementById(`nav_q${q}`);
+  if (el) el.classList.toggle('answered', done);
+}
+
+// ── Highlight ──
+function toggleHighlight() {
+  highlightMode = !highlightMode;
+  document.body.classList.toggle('highlight-mode', highlightMode);
+  document.getElementById('highlightBtn').style.background = highlightMode ? 'var(--accent-light)' : '';
+  document.getElementById('highlightBtn').style.color = highlightMode ? 'var(--accent)' : '';
+  if (highlightMode) {
+    document.addEventListener('mouseup', doHighlight);
+  } else {
+    document.removeEventListener('mouseup', doHighlight);
+  }
+}
+function doHighlight() {
+  const sel = window.getSelection();
+  if (!sel || sel.isCollapsed) return;
+  try {
+    const range = sel.getRangeAt(0);
+    const span = document.createElement('span');
+    span.className = 'highlighted';
+    range.surroundContents(span);
+    sel.removeAllRanges();
+  } catch(e) {}
+}
+function eraseHighlights() {
+  document.querySelectorAll('.highlighted').forEach(el => {
+    const parent = el.parentNode;
+    while (el.firstChild) parent.insertBefore(el.firstChild, el);
+    parent.removeChild(el);
+  });
+}
+
+// ── Submit ──
+function submitAnswers() {
+  // For demo: count filled answers
+  let count = 0;
+  document.querySelectorAll('input[data-q]').forEach(inp => { if (inp.value.trim()) count++; });
+  for (let i = 11; i <= 24; i++) { if (document.querySelector(`[name="q${i}"]:checked`)) count++; }
+  count += Object.keys(teaAnswers).length;
+  count += Math.min(multiAnswers.g1.length,2) + Math.min(multiAnswers.g2.length,2) + Math.min(multiAnswers.g3.length,2);
+
+  // Band estimate
+  let band = '–';
+  if (count >= 39) band = '9.0';
+  else if (count >= 37) band = '8.5';
+  else if (count >= 35) band = '8.0';
+  else if (count >= 32) band = '7.5';
+  else if (count >= 30) band = '7.0';
+  else if (count >= 26) band = '6.5';
+  else if (count >= 23) band = '6.0';
+  else if (count >= 18) band = '5.5';
+  else if (count >= 16) band = '5.0';
+  else band = 'Below 5';
+
+  document.getElementById('modalScore').textContent = count;
+  document.getElementById('modalBand').textContent = `Estimated Band ${band}`;
+  document.getElementById('resultsModal').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('resultsModal').classList.remove('open');
+}
+// After submit, allow user to jump into script view
+function openScriptFromResults() {
+  closeModal();
+  openScript();
+}
+</script>
+</body>
+</html>
