@@ -1,0 +1,795 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>IELTS Listening – Full Practice Test</title>
+<style>
+  /*
+   * The colour palette below has been tweaked to more closely match
+   * the modern aesthetic used on the reading mock platform.  Neutral
+   * greys and a crisp primary accent bring the interface up to date.
+   */
+  /*
+   * Updated colour palette based on the IELTS reading platform screenshot.
+   * Soft beige backgrounds and rich green accents reflect the mature,
+   * classic look of the reading tests. A golden highlight variable is
+   * included for potential future embellishments (e.g. question labels).
+   */
+  :root{
+    --grey:#f5f1e8;    /* overall page background */
+    --border:#e1d5c0;  /* borders and outlines */
+    --ok:#28a745;      /* correct answer state */
+    --bad:#dc3545;     /* incorrect answer state */
+    --ink:#2c3e1a;     /* primary text colour (dark green) */
+    --accent:#206b46;  /* primary accent colour (rich green) */
+    --highlight:#d4a62f; /* golden highlight for future use */
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Arial,Helvetica,sans-serif;background:var(--grey);color:var(--ink);line-height:1.58;
+       display:flex;flex-direction:column;align-items:center;padding:24px 16px 100px}
+  .container{width:100%;max-width:980px}
+  h1.title{font-size:22px;text-align:center;margin:6px 0 14px}
+  .score-banner{margin:10px 0 18px;padding:10px 14px;border-left:6px solid var(--ok);background:#e9f7ef;font-weight:700;display:none}
+  .progress{margin:0 0 12px;color:#666}
+  /* Small buttons (e.g. reset) take on the accent border and neutral fill */
+  .small-btn{border:1px solid var(--accent);
+             border-radius:6px;
+             background:var(--grey);
+             padding:6px 10px;
+             cursor:pointer;
+             color:var(--ink);
+             text-decoration:none}
+  .part-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:8px;font-weight:700}
+  .instruction{margin:4px 0 12px;text-align:center}
+  .paper{border:1px solid #111;background:#fff;padding:22px;border-radius:6px}
+  .paper h2{margin:0 0 12px;text-align:center;font-size:20px}
+  .paper h3{margin:18px 0 8px;font-size:18px}
+  ul{margin-left:20px}
+  li{margin:8px 0}
+  /* Text input fields now use the neutral background instead of the old blue tint */
+  .text-input{min-width:95px;max-width:220px;width:150px;height:36px;line-height:34px;
+              border:1px solid #666;border-radius:4px;padding:0 8px;margin:0 4px;
+              text-align:center;font-size:16px;
+              background:var(--grey)}
+  .text-input.correct{background:#d4edda!important;border-color:var(--ok)!important;color:#155724!important}
+  .text-input.incorrect{background:#f8d7da!important;border-color:var(--bad)!important;color:#721c24!important}
+  .sm{width:110px}
+  select{width:100px;height:36px;border:1px solid #666;border-radius:6px;padding:0 8px;font-size:15px;background:#fff}
+  select.correct{background:#d4edda!important;border-color:var(--ok)!important;color:#155724!important}
+  select.incorrect{background:#f8d7da!important;border-color:var(--bad)!important;color:#721c24!important}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{padding:8px 12px;border:2px solid var(--accent);border-radius:10px;
+       background:var(--grey);
+       font-weight:700;cursor:grab;user-select:none;white-space:nowrap}
+  .opt:active{cursor:grabbing}
+  .row{display:flex;align-items:center;gap:14px;padding:8px 10px;margin:8px 0;border-radius:8px;background:#fff}
+  .num{width:34px;text-align:right;font-weight:700}
+  .label{flex:1}
+  .drop{min-width:110px;min-height:36px;display:flex;align-items:center;justify-content:center;border:2px dashed #bbb;border-radius:10px;background:#fff;font-weight:700;color:#555}
+  .drop.drag-hover{outline:2px solid var(--accent)}
+  .drag-ok{background:#d4edda}
+  .drag-bad{background:#f8d7da}
+  .counter{font-size:12px;color:#666;margin-top:4px}
+  /* Navigation bar styled to mirror the reading mock platform.  The bar
+     inherits the page's neutral background and uses accent colours for
+     borders and buttons. */
+  .navbar{display:flex;align-items:center;gap:18px;padding:8px 12px;
+          border-top:1px solid var(--border);position:fixed;bottom:0;left:0;right:0;
+          background:var(--grey);z-index:100;overflow-x:auto;white-space:nowrap}
+  .nav-label{font-weight:bold;margin-right:6px;cursor:pointer}
+  .sub-nav{display:none;gap:4px}
+  /* Default nav button inherits the neutral background and uses the accent colour
+     for its border. Text uses the ink colour. */
+  .nav-btn{width:30px;height:30px;line-height:28px;
+           border:1px solid var(--accent);
+           border-radius:3px;text-align:center;cursor:pointer;font-size:14px;
+           background:var(--grey);
+           color:var(--ink);
+           text-decoration:none;display:flex;align-items:center;justify-content:center}
+  /* Answered questions are highlighted in gold to mirror the numbered tabs
+     on the reading page. */
+  .nav-btn.answered{background:var(--highlight);
+                    border-color:var(--highlight);
+                    color:var(--ink);} /* dark text on gold */
+  .nav-btn.correct{background:var(--ok);border-color:var(--ok);color:#fff}
+  .nav-btn.incorrect{background:var(--bad);border-color:var(--bad);color:#fff}
+  /* Submit button stands out with the golden highlight and dark text */
+  #submit-btn{padding:10px 12px;
+              border:none;
+              border-radius:4px;
+              background:var(--highlight);
+              color:var(--ink);
+              cursor:pointer;
+              font-weight:bold;
+              font-size:16px;
+              margin-left:auto}
+  .test-part{display:none}
+  .test-part.active{display:block}
+  .mini-toolbar{position:absolute;background:#fff;border:1px solid #ccc;padding:6px 8px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.15);display:none;z-index:10000}
+  .mini-toolbar button{background:var(--accent);color:#fff;border:none;border-radius:6px;padding:6px 10px;margin:0 4px;cursor:pointer;font-size:13px}
+  .mini-toolbar .remove{background:var(--bad)}
+  .hl{background:#f4c20d88; box-decoration-break:clone; cursor:pointer}
+  .correct-answer{font-size:14px;color:#155724;margin-left:6px}
+  .radio-group{display:flex;flex-direction:column;gap:8px;padding:10px;border:1px solid #c9c9c9;border-radius:6px}
+  @media print{body{padding:0}.navbar,.mini-toolbar{display:none!important}}
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  select:-webkit-autofill {
+    /* Remove the old blue autofill highlight and use the neutral background */
+    -webkit-box-shadow: 0 0 0px 1000px var(--grey) inset;
+    -webkit-text-fill-color: var(--ink);
+    transition: background-color 9999s ease-in-out 0s;
+  }
+  table th, table thead tr, table thead td, table tr:first-child td {
+    /* Table headers and first rows use the neutral beige background */
+    background-color: var(--grey) !important;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+  <div id="addToolbar" class="mini-toolbar"><button id="addHL">Highlight</button></div>
+  <div id="removeToolbar" class="mini-toolbar"><button id="removeHL" class="remove">Remove highlight</button></div>
+
+  <div class="container">
+    <h1 class="title">IELTS Listening Practice Test</h1>
+    <!--
+      The original listening template included a credit line that isn't
+      appropriate for the customised version.  It has been removed to
+      declutter the header and avoid showing external watermarks.
+    -->
+    <div id="scoreBanner" class="score-banner"></div>
+    <div id="progress" class="progress">Progress: 0/40 answered</div>
+
+    <!-- ===== PART 1 (Q1–10) ===== -->
+    <section id="part1" class="test-part active">
+      <!-- Audio player for Part 1 -->
+      <div style="text-align:center;margin:12px 0;">
+        <audio controls style="width:100%;max-width:600px;">
+          <source src="S1.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class="part-head"><div><strong>PART 1</strong></div><div><em>Questions 1–10</em></div></div>
+      <p class="instruction">Complete the form below.</p>
+      <p class="instruction"><strong>Write NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer.</p>
+      <div class="paper">
+        <h2>International Student Travel Agency</h2>
+        <h3>Enquiry Form</h3>
+        <table aria-label="Enquiry Form" style="width:100%;border-collapse:collapse;margin-top:8px">
+          <tbody>
+            <tr><td style="padding:10px">Name:</td><td style="padding:10px">Sarah Brown</td></tr>
+            <tr><td style="padding:10px">Date of birth:</td><td style="padding:10px"><input id="q1" class="text-input sm" placeholder="1." aria-label="Q1"></td></tr>
+            <tr><td style="padding:10px">Address:</td><td style="padding:10px">21 Waverley Road, Radstone, RD4 6WV</td></tr>
+            <tr><td style="padding:10px">Contact tel. no.:</td><td style="padding:10px"><input id="q2" class="text-input sm" placeholder="2." aria-label="Q2"></td></tr>
+            <tr><td style="padding:10px">Notes:</td><td style="padding:10px">
+              <ul style="margin:0 0 0 20px">
+                <li>wants to travel in <input id="q3" class="text-input sm" placeholder="3." aria-label="Q3"> Europe</li>
+                <li>hopes to travel by <input id="q4" class="text-input sm" placeholder="4." aria-label="Q4"></li>
+                <li>interested in working in a <input id="q5" class="text-input sm" placeholder="5." aria-label="Q5"></li>
+                <li>recommended to consider an alternative e.g. <input id="q6" class="text-input sm" placeholder="6." aria-label="Q6"> work</li>
+                <li>advised to buy a European <input id="q7" class="text-input sm" placeholder="7." aria-label="Q7"> for travelling</li>
+                <li>given a <input id="q8" class="text-input sm" placeholder="8." aria-label="Q8"> with accommodation details</li>
+                <li>agreed to take out <input id="q9" class="text-input sm" placeholder="9." aria-label="Q9"> from the Agency</li>
+                <li>told to use an <input id="q10" class="text-input sm" placeholder="10." aria-label="Q10"> for contacting people</li>
+              </ul>
+            </td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== PART 2 (Q11–20) ===== -->
+    <section id="part2" class="test-part">
+      <!-- Audio player for Part 2 -->
+      <div style="text-align:center;margin:12px 0;">
+        <audio controls style="width:100%;max-width:600px;">
+          <source src="S2.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class="part-head"><div><strong>PART 2</strong></div><div><em>Questions 11–20</em></div></div>
+      <div class="paper" style="margin-bottom:16px">
+        <h2>Afternoon Tea</h2>
+        <p class="instruction"><strong>Questions 11–14</strong></p>
+        <p class="instruction">Choose the correct letter, A, B or C.</p>
+        <div class="radio-group" id="q11_group">
+          <p>11 According to Claire, what makes the Emperor Hotel attractive to people?</p>
+          <label><input type="radio" name="q11" value="A"> A the chance to see famous people</label>
+          <label><input type="radio" name="q11" value="B"> B the friendliness of the staff</label>
+          <label><input type="radio" name="q11" value="C"> C the luxury of the surroundings</label>
+        </div>
+        <div class="radio-group" id="q12_group">
+          <p>12 The Emperor blend of tea is</p>
+          <label><input type="radio" name="q12" value="A"> A known internationally.</label>
+          <label><input type="radio" name="q12" value="B"> B made for the hotel</label>
+          <label><input type="radio" name="q12" value="C"> C sold in only a few places</label>
+        </div>
+        <div class="radio-group" id="q13_group">
+          <p>13 Why are the tea tables special?</p>
+          <label><input type="radio" name="q13" value="A"> A They are covered with unusual cloths.</label>
+          <label><input type="radio" name="q13" value="B"> B They exactly match the chairs</label>
+          <label><input type="radio" name="q13" value="C"> C They are made from re-used flooring.</label>
+        </div>
+        <div class="radio-group" id="q14_group">
+          <p>14 The cups and saucers that are used at the hotel</p>
+          <label><input type="radio" name="q14" value="A"> A are from England.</label>
+          <label><input type="radio" name="q14" value="B"> B can be bought by customers</label>
+          <label><input type="radio" name="q14" value="C"> C have pictures of a king and queen</label>
+        </div>
+      </div>
+      <div class="paper">
+        <h2>Tea Parties</h2>
+        <p class="instruction"><strong>Questions 15–20</strong></p>
+        <p class="instruction"><strong>What is the highlight of each of the following tea parties?</strong></p>
+        <p style="text-align:center;margin-top:-6px">Choose <strong>SIX</strong> answers (A–H) and drag one letter to each tea party.</p>
+        <div class="opts" id="opts15">
+          <div class="opt" id="A" draggable="true">A enjoying local fruit</div>
+          <div class="opt" id="B" draggable="true">B sampling warm foods</div>
+          <div class="opt" id="C" draggable="true">C feeling like royalty</div>
+          <div class="opt" id="D" draggable="true">D being in a garden</div>
+          <div class="opt" id="E" draggable="true">E listening to music</div>
+          <div class="opt" id="F" draggable="true">F finding out about previous guests</div>
+          <div class="opt" id="G" draggable="true">G having a special cake</div>
+          <div class="opt" id="H" draggable="true">H capturing happy memories</div>
+        </div>
+        <div class="row" id="q15_row"><div class="num">15</div><div class="label">Playtime Tea</div><div class="drop" data-question="15" data-box="opts15"></div><input type="hidden" id="q15"/></div>
+        <div class="row" id="q16_row"><div class="num">16</div><div class="label">Bridal Tea</div><div class="drop" data-question="16" data-box="opts15"></div><input type="hidden" id="q16"/></div>
+        <div class="row" id="q17_row"><div class="num">17</div><div class="label">Summer Tea</div><div class="drop" data-question="17" data-box="opts15"></div><input type="hidden" id="q17"/></div>
+        <div class="row" id="q18_row"><div class="num">18</div><div class="label">Canadian Tea</div><div class="drop" data-question="18" data-box="opts15"></div><input type="hidden" id="q18"/></div>
+        <div class="row" id="q19_row"><div class="num">19</div><div class="label">Farmers’ Tea</div><div class="drop" data-question="19" data-box="opts15"></div><input type="hidden" id="q19"/></div>
+        <div class="row" id="q20_row"><div class="num">20</div><div class="label">Seniors’ Tea</div><div class="drop" data-question="20" data-box="opts15"></div><input type="hidden" id="q20"/></div>
+      </div>
+    </section>
+
+    <!-- ===== PART 3 (Q21–30) ===== -->
+    <section id="part3" class="test-part">
+      <!-- Audio player for Part 3 -->
+      <div style="text-align:center;margin:12px 0;">
+        <audio controls style="width:100%;max-width:600px;">
+          <source src="S3.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class="part-head"><div><strong>PART 3</strong></div><div><em>Questions 21–30</em></div></div>
+      <div class="paper" style="margin-bottom:16px">
+        <h2>Forensic Linguistics</h2>
+        <p class="instruction"><strong>Questions 21–24</strong></p>
+        <p class="instruction">Choose the correct letter, A, B or C.</p>
+        <div class="radio-group" id="q21_group">
+          <p>21 What do the students agree about defining forensic linguistics?</p>
+          <label><input type="radio" name="q21" value="A"> A The dictionary definition was not very useful.</label>
+          <label><input type="radio" name="q21" value="B"> B They could provide an example of the kind of work involved.</label>
+          <label><input type="radio" name="q21" value="C"> C They should read about the subject to see how it is described.</label>
+        </div>
+        <div class="radio-group" id="q22_group">
+          <p>22 Jen thinks it will be difficult to analyse the voice recording because</p>
+          <label><input type="radio" name="q22" value="A"> A it is not of good quality.</label>
+          <label><input type="radio" name="q22" value="B"> B the accent is difficult to understand.</label>
+          <label><input type="radio" name="q22" value="C"> C she doesn’t know if the speaker is male or female.</label>
+        </div>
+        <div class="row" id="q23_row">
+          <p>23 Why does Jen think that the ‘suspect’ might vary their voice patterns?</p>
+          <label><input type="radio" name="q23" value="A"> A because they’re being recorded</label>
+          <label><input type="radio" name="q23" value="B"> B because they’ve been told to</label>
+          <label><input type="radio" name="q23" value="C"> C because they feel uncomfortable about their accent</label>
+        </div>
+        <div class="radio-group" id="q24_group">
+          <p>24 What does Rob think about Jen’s approach to study?</p>
+          <label><input type="radio" name="q24" value="A"> A She worries too much about her ability.</label>
+          <label><input type="radio" name="q24" value="B"> B She often ignores the most important issues.</label>
+          <label><input type="radio" name="q24" value="C"> C She has trouble getting started.</label>
+        </div>
+      </div>
+      <div class="paper">
+        <p class="instruction"><strong>Questions 25–30</strong></p>
+        <div class="block" id="g1" style="margin-bottom:12px">
+          <p><strong>Questions 25 and 26</strong> — Which TWO books do Jen and Rob decide to get from the library?</p>
+          <div role="group" aria-labelledby="g1" class="optlist" style="border:1px solid #c9c9c9;border-radius:6px;padding:8px 10px">
+            <div><label><input type="checkbox" id="g1a" data-group="g1"> <strong>A.</strong> Voice Identification</label></div>
+            <div><label><input type="checkbox" id="g1b" data-group="g1"> <strong>B.</strong> Modern Forensic Techniques</label></div>
+            <div><label><input type="checkbox" id="g1c" data-group="g1"> <strong>C.</strong> Language and Crime</label></div>
+            <div><label><input type="checkbox" id="g1d" data-group="g1"> <strong>D.</strong> Forensics Today</label></div>
+            <div><label><input type="checkbox" id="g1e" data-group="g1"> <strong>E.</strong> Research Methods in Forensic Linguistics</label></div>
+            <div class="counter" id="g1_count">0/2 selected</div>
+          </div>
+        </div>
+        <div class="block" id="g2" style="margin-bottom:12px">
+          <p><strong>Questions 27 and 28</strong> — Which TWO practical considerations are both Jen and Rob concerned about?</p>
+          <div role="group" aria-labelledby="g2" class="optlist" style="border:1px solid #c9c9c9;border-radius:6px;padding:8px 10px">
+            <div><label><input type="checkbox" id="g2a" data-group="g2"> <strong>A.</strong> how much time they have for writing up the project</label></div>
+            <div><label><input type="checkbox" id="g2b" data-group="g2"> <strong>B.</strong> being able to do enough research</label></div>
+            <div><label><input type="checkbox" id="g2c" data-group="g2"> <strong>C.</strong> only speaking to the ‘suspect’ once</label></div>
+            <div><label><input type="checkbox" id="g2d" data-group="g2"> <strong>D.</strong> using recording equipment</label></div>
+            <div><label><input type="checkbox" id="g2e" data-group="g2"> <strong>E.</strong> how easy it will be to contact the ‘suspect’</label></div>
+            <div class="counter" id="g2_count">0/2 selected</div>
+          </div>
+        </div>
+        <div class="block" id="g3">
+          <p><strong>Questions 29 and 30</strong> — Which TWO sections of the project will Rob write alone?</p>
+          <div role="group" aria-labelledby="g3" class="optlist" style="border:1px solid #c9c9c9;border-radius:6px;padding:8px 10px">
+            <div><label><input type="checkbox" id="g3a" data-group="g3"> <strong>A.</strong> Methodology</label></div>
+            <div><label><input type="checkbox" id="g3b" data-group="g3"> <strong>B.</strong> Literature review</label></div>
+            <div><label><input type="checkbox" id="g3c" data-group="g3"> <strong>C.</strong> Introduction</label></div>
+            <div><label><input type="checkbox" id="g3d" data-group="g3"> <strong>D.</strong> Analysis</label></div>
+            <div><label><input type="checkbox" id="g3e" data-group="g3"> <strong>E.</strong> Discussion and conclusions</label></div>
+            <div class="counter" id="g3_count">0/2 selected</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PART 4 (Q31–40) ===== -->
+    <section id="part4" class="test-part">
+      <!-- Audio player for Part 4 -->
+      <div style="text-align:center;margin:12px 0;">
+        <audio controls style="width:100%;max-width:600px;">
+          <source src="S4.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class="part-head"><div><strong>PART 4</strong></div><div><em>Questions 31–40</em></div></div>
+      <p class="instruction">Complete the notes below. <strong>Write NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> for each answer.</p>
+      <div class="paper">
+        <h2>Stone Age Man in Japan</h2>
+        <h3>Evidence</h3>
+        <ul>
+          <li><strong>1877 Omori</strong></li>
+          <ul><li>Zooioglet found pieces of pottery with an unusual pattern</li></ul>
+          <li><strong>1960s Fukui cave</strong></li>
+          <ul><li>Same style of pottery dated from about <input id="q31" class="text-input sm" aria-label="Q31" placeholder="31."> BC</li></ul>
+        </ul>
+        <h3>35,000 to 30,000 BC</h3>
+        <ul>
+          <li>People used a <input id="q32" class="text-input sm" aria-label="Q32" placeholder="32."> to get into Japan</li>
+          <li>Higher temperatures resulted in:</li>
+          <ul>
+            <li>growth of <input id="q33" class="text-input sm" aria-label="Q33" placeholder="33."></li>
+            <li>new animal species</li>
+            <li>use of <input id="q34" class="text-input sm" aria-label="Q34" placeholder="34."> as weapons</li>
+            <li>availability of plants <input id="q35" class="text-input sm" aria-label="Q35" placeholder="35."> and fish</li>
+          </ul>
+        </ul>
+        <h3>10,500 to 8,000 BC (early Jomon period)</h3>
+        <ul>
+          <li>old theory: people who were hunters didn't make or use pottery</li>
+          <li>present belief: pottery making was invented by Jomon hunters before development of agriculture</li>
+        </ul>
+        <h3>8,000 to 5,000 BC (later Jomon period)</h3>
+        <ul>
+          <li>Jomon people were:</li>
+          <ul>
+            <li>staying in one place for longer</li>
+            <li>not living in caves but in <input id="q36" class="text-input sm" aria-label="Q36" placeholder="36."></li>
+            <li>using pairs of <input id="q37" class="text-input sm" aria-label="Q37" placeholder="37."></li>
+          </ul>
+          <li>Sedentary lifestyle led to rise in <input id="q38" class="text-input sm" aria-label="Q38" placeholder="38."></li>
+        </ul>
+        <h3>End of Jomon period</h3>
+        <ul>
+          <li>Migrants introduced:</li>
+          <ul>
+            <li>developments in manufacture of textiles and glass</li>
+            <li>new traditions for <input id="q39" class="text-input sm" aria-label="Q39" placeholder="39."> ceremonies</li>
+            <li>new architecture</li>
+          </ul>
+          <li>Main crop grown was <input id="q40" class="text-input sm" aria-label="Q40" placeholder="40."></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+      <span class="nav-label" onclick="showPart(1)">Part 1</span>
+      <div class="sub-nav" id="sub1">
+        <a href="#q1" class="nav-btn" id="nav1" data-q="1">1</a><a href="#q2" class="nav-btn" id="nav2" data-q="2">2</a><a href="#q3" class="nav-btn" id="nav3" data-q="3">3</a><a href="#q4" class="nav-btn" id="nav4" data-q="4">4</a><a href="#q5" class="nav-btn" id="nav5" data-q="5">5</a><a href="#q6" class="nav-btn" id="nav6" data-q="6">6</a><a href="#q7" class="nav-btn" id="nav7" data-q="7">7</a><a href="#q8" class="nav-btn" id="nav8" data-q="8">8</a><a href="#q9" class="nav-btn" id="nav9" data-q="9">9</a><a href="#q10" class="nav-btn" id="nav10" data-q="10">10</a>
+      </div>
+      <span class="nav-label" onclick="showPart(2)">Part 2</span>
+      <div class="sub-nav" id="sub2">
+        <a href="#q11_group" class="nav-btn" id="nav11" data-q="11">11</a><a href="#q12_group" class="nav-btn" id="nav12" data-q="12">12</a><a href="#q13_group" class="nav-btn" id="nav13" data-q="13">13</a><a href="#q14_group" class="nav-btn" id="nav14" data-q="14">14</a><a href="#q15_row" class="nav-btn" id="nav15" data-q="15">15</a><a href="#q16_row" class="nav-btn" id="nav16" data-q="16">16</a><a href="#q17_row" class="nav-btn" id="nav17" data-q="17">17</a><a href="#q18_row" class="nav-btn" id="nav18" data-q="18">18</a><a href="#q19_row" class="nav-btn" id="nav19" data-q="19">19</a><a href="#q20_row" class="nav-btn" id="nav20" data-q="20">20</a>
+      </div>
+      <span class="nav-label" onclick="showPart(3)">Part 3</span>
+      <div class="sub-nav" id="sub3">
+        <a href="#q21_group" class="nav-btn" id="nav21" data-q="21">21</a><a href="#q22_group" class="nav-btn" id="nav22" data-q="22">22</a><a href="#q23_row" class="nav-btn" id="nav23" data-q="23">23</a><a href="#q24_group" class="nav-btn" id="nav24" data-q="24">24</a><a href="#g1" class="nav-btn" id="nav25" data-q="25">25</a><a href="#g1" class="nav-btn" id="nav26" data-q="26">26</a><a href="#g2" class="nav-btn" id="nav27" data-q="27">27</a><a href="#g2" class="nav-btn" id="nav28" data-q="28">28</a><a href="#g3" class="nav-btn" id="nav29" data-q="29">29</a><a href="#g3" class="nav-btn" id="nav30" data-q="30">30</a>
+      </div>
+      <span class="nav-label" onclick="showPart(4)">Part 4</span>
+      <div class="sub-nav" id="sub4">
+        <a href="#q31" class="nav-btn" id="nav31" data-q="31">31</a><a href="#q32" class="nav-btn" id="nav32" data-q="32">32</a><a href="#q33" class="nav-btn" id="nav33" data-q="33">33</a><a href="#q34" class="nav-btn" id="nav34" data-q="34">34</a><a href="#q35" class="nav-btn" id="nav35" data-q="35">35</a><a href="#q36" class="nav-btn" id="nav36" data-q="36">36</a><a href="#q37" class="nav-btn" id="nav37" data-q="37">37</a><a href="#q38" class="nav-btn" id="nav38" data-q="38">38</a><a href="#q39" class="nav-btn" id="nav39" data-q="39">39</a><a href="#q40" class="nav-btn" id="nav40" data-q="40">40</a>
+      </div>
+      <button id="submit-btn" type="button">Submit Answers</button>
+    </nav>
+  </div>
+
+<script>
+/* ---------- Answer key (placeholder) ---------- */
+const keyText = {
+  1:['30th March 1988','30 March 1988','30-03-1988','30/03/1988'],
+  2:['0903775115'],
+  3:['Northern'],
+  4:['train'],
+  5:['hotel'],
+  6:['farm'],
+  7:['pass'],
+  8:['booklet'],
+  9:['insurance'],
+  10:['internet cafe'],
+  11:'C',
+  12:'B',
+  13:'C',
+  14:'B',
+  15:'C',
+  16:'H',
+  17:'D',
+  18:'A',
+  19:'B',
+  20:'F',
+  21:'B',
+  22:'A',
+  23:'B',
+  24:'A',
+  '25-26':['B','E'],
+  '27-28':['D','A'],
+  '29-30':['C','E'],
+  31:['10,000'],
+  32:['land bridge'],
+  33:['forests'],
+  34:['arrows'],
+  35:['nuts'],
+  36:['villages'],
+  37:['stones'],
+  38:['population'],
+  39:['marriage'],
+  40:['rice']
+};
+
+/* ---------- Helpers ---------- */
+const norm = s => (s||'').toString().trim().toLowerCase().replace(/\s+/g,'');
+function markNav(q, ok){
+  const nav=document.getElementById('nav'+q);
+  if(!nav) return;
+  nav.classList.remove('correct','incorrect');
+  nav.classList.add(ok?'correct':'incorrect');
+  if(!ok) nav.classList.add('answered');
+}
+function showSolutionNextTo(el, text){
+  if(!el) return;
+  const span=document.createElement('span'); span.className='correct-answer';
+  span.textContent=' (Correct: '+text+')';
+  el.parentNode.insertBefore(span, el.nextSibling);
+}
+function clearFeedback(){
+  document.querySelectorAll('.correct,.incorrect,.drag-ok,.drag-bad').forEach(n=>n.classList.remove('correct','incorrect','drag-ok','drag-bad'));
+  document.querySelectorAll('.correct-answer').forEach(n=>n.remove());
+  document.querySelectorAll('.nav-btn').forEach(n=>n.classList.remove('correct','incorrect'));
+}
+
+/* ---------- Progress ---------- */
+function updateProgress(){
+  let c=0;
+  for(let i=1;i<=40;i++){
+    const nav=document.getElementById('nav'+i);
+    let filled=false;
+
+    if(i>=15 && i<=20){
+      const hidden=document.getElementById('q'+i);
+      filled=!!(hidden && hidden.value);
+    }
+    else if(i>=11 && i<=14){
+      const selected=document.querySelector(`input[name="q${i}"]:checked`);
+      filled=!!selected;
+    }
+    else if(i>=21 && i<=24){
+      const selected=document.querySelector(`input[name="q${i}"]:checked`);
+      filled=!!selected;
+    }
+    else if(i>=25 && i<=30){
+      const grp = i<=26?'g1':i<=28?'g2':'g3';
+      const n=[...document.querySelectorAll(`input[data-group="${grp}"]`)].filter(x=>x.checked).length;
+      filled=n>0;
+    }
+    else{
+      const input=document.getElementById('q'+i);
+      filled=!!(input && input.value.trim());
+    }
+
+    if(nav) nav.classList.toggle('answered', filled);
+    if(filled) c++;
+  }
+  document.getElementById('progress').textContent=`Progress: ${c}/40 answered`;
+}
+
+/* ---------- Submit & Scoring ---------- */
+function submitAnswers(){
+  clearFeedback();
+  let score=0;
+
+  // Q1–10 text
+  for(let i=1;i<=10;i++){
+    const input=document.getElementById('q'+i); if(!input) continue;
+    const val=norm(input.value);
+    if(!val) continue;
+    const answers=Array.isArray(keyText[i])?keyText[i]:[keyText[i]];
+    const ok=answers.some(a=>norm(a)===val);
+    if(ok) score++;
+    input.classList.add(ok?'correct':'incorrect');
+    markNav(i,ok);
+    if(!ok) showSolutionNextTo(input,answers[0]);
+  }
+
+  // Q11–14 radio
+  for(let i=11;i<=14;i++){
+    const selected=document.querySelector(`input[name="q${i}"]:checked`);
+    const val=(selected?.value||'').toUpperCase();
+    const ok=val===keyText[i];
+    if(ok) score++;
+    if(selected) selected.parentElement.classList.add(ok?'correct':'incorrect');
+    markNav(i,ok);
+    if(!ok && val) showSolutionNextTo(selected.parentElement,keyText[i]);
+  }
+
+  // 15–20 drag
+  for(let i=15;i<=20;i++){
+    const hidden=document.getElementById('q'+i);
+    const row=document.getElementById(`q${i}_row`);
+    const val=(hidden?.value||'').toUpperCase();
+    const ok=val===keyText[i];
+    if(ok) score++;
+    if(row) row.classList.add(ok?'drag-ok':'drag-bad');
+    markNav(i,ok);
+    if(!ok && val){ const slot=row.querySelector('.drop'); showSolutionNextTo(slot,keyText[i]); }
+  }
+
+  // Q21–24 radio
+  for(let i=21;i<=24;i++){
+    const selected=document.querySelector(`input[name="q${i}"]:checked`);
+    const val=(selected?.value||'').toUpperCase();
+    const ok=val===keyText[i];
+    if(ok) score++;
+    if(selected) selected.parentElement.classList.add(ok?'correct':'incorrect');
+    markNav(i,ok);
+    if(!ok && val) showSolutionNextTo(selected.parentElement,keyText[i]);
+  }
+
+  // 25–30 paired sets
+  const paired = [
+    {q:[25,26], id:'g1', ans:new Set(keyText['25-26'])},
+    {q:[27,28], id:'g2', ans:new Set(keyText['27-28'])},
+    {q:[29,30], id:'g3', ans:new Set(keyText['29-30'])},
+  ];
+  paired.forEach(set=>{
+    const chosen=[...document.querySelectorAll(`input[data-group="${set.id}"]:checked`)]
+                  .map(x=>x.id.slice(-1).toUpperCase());
+    const correctCount=chosen.filter(x=>set.ans.has(x)).length;
+    score += correctCount;
+    set.q.forEach((q,idx)=>{
+      const letter = chosen[idx] || '';
+      const ok = set.ans.has(letter);
+      markNav(q, ok);
+      if(!ok && letter){
+        const blk = document.getElementById(set.id);
+        showSolutionNextTo(blk, Array.from(set.ans).join(' & '));
+      }
+    });
+  });
+
+  // 31–40 text
+  for(let i=31;i<=40;i++){
+    const input=document.getElementById('q'+i);
+    const val=norm(input?.value);
+    if(!val) continue;
+    const answers=Array.isArray(keyText[i])?keyText[i]:[keyText[i]];
+    const ok=answers.some(a=>norm(a)===val);
+    if(ok) score++;
+    input.classList.add(ok?'correct':'incorrect');
+    markNav(i,ok);
+    if(!ok) showSolutionNextTo(input,answers[0]);
+  }
+
+  const banner=document.getElementById('scoreBanner');
+  banner.textContent=`Score: ${score}/40 correct`;
+  banner.style.display='block';
+  try{window.scrollTo({top:0,behavior:'smooth'});}catch(_){}
+}
+
+/* ---------- Drag & Drop (reusable) ---------- */
+function initDrag(containerId){
+  const box=document.getElementById(containerId);
+  function sortBox(){
+    Array.from(box.children).sort((a,b)=>a.id.localeCompare(b.id)).forEach(el=>box.appendChild(el));
+  }
+  box.addEventListener('dragover',e=>e.preventDefault());
+  box.addEventListener('drop',e=>{
+    e.preventDefault();
+    const dragged=document.querySelector('.opt.dragging');
+    if(!dragged) return;
+    const from=dragged.closest('.drop');
+    if(from){
+      const q=from.dataset.question;
+      document.getElementById('q'+q).value='';
+    }
+    box.appendChild(dragged); sortBox(); updateProgress();
+  });
+  box.querySelectorAll('.opt').forEach(opt=>{
+    opt.addEventListener('dragstart',e=>{opt.classList.add('dragging'); e.dataTransfer.setData('text/plain',opt.id);});
+    opt.addEventListener('dragend',()=>opt.classList.remove('dragging'));
+  });
+  document.querySelectorAll(`.drop[data-box="${containerId}"]`).forEach(drop=>{
+    drop.addEventListener('dragover',e=>{e.preventDefault();drop.classList.add('drag-hover');});
+    drop.addEventListener('dragleave',()=>drop.classList.remove('drag-hover'));
+    drop.addEventListener('drop',e=>{
+      e.preventDefault();drop.classList.remove('drag-hover');
+      const dragged=document.querySelector('.opt.dragging'); if(!dragged) return;
+      const existing=drop.querySelector('.opt'); if(existing) box.appendChild(existing);
+      drop.appendChild(dragged);
+      const q=drop.dataset.question; document.getElementById('q'+q).value=dragged.id.toUpperCase();
+      sortBox(); updateProgress();
+    });
+  });
+}
+
+/* ---------- Choose TWO limiters ---------- */
+function initTwoOfFive(groupId){
+  const checks=[...document.querySelectorAll(`input[type="checkbox"][data-group="${groupId}"]`)];
+  const counter=document.getElementById(`${groupId}_count`);
+  function upd(){counter.textContent=`${checks.filter(c=>c.checked).length}/2 selected`; updateProgress();}
+  checks.forEach(ch=>{
+    ch.addEventListener('change',()=>{
+      const sel=checks.filter(c=>c.checked);
+      if(sel.length>2) ch.checked=false;
+      upd();
+    });
+  }); upd();
+}
+
+/* ---------- Highlight add & per-highlight remove ---------- */
+let selectionRange=null, currentHL=null;
+const addTb=document.getElementById('addToolbar');
+const rmTb=document.getElementById('removeToolbar');
+
+function placeToolbar(tb, x, y){
+  tb.style.left = (x + window.scrollX) + 'px';
+  tb.style.top  = (y + window.scrollY) + 'px';
+  tb.style.display='block';
+}
+function hideToolbars(){ addTb.style.display='none'; rmTb.style.display='none'; }
+
+function wrapSelection(range){
+  const span=document.createElement('span');
+  span.className='hl';
+  const frag=range.cloneContents();
+  span.appendChild(frag);
+  range.deleteContents();
+  range.insertNode(span);
+  return span;
+}
+function unwrap(el){
+  const p=el.parentNode;
+  while(el.firstChild){ p.insertBefore(el.firstChild, el); }
+  p.removeChild(el);
+}
+
+document.addEventListener('mouseup',(e)=>{
+  if(e.target.closest('.mini-toolbar')) return;
+  const sel=window.getSelection();
+  if(sel && sel.rangeCount && sel.toString().trim().length>0){
+    selectionRange = sel.getRangeAt(0).cloneRange();
+    const rect=selectionRange.getBoundingClientRect();
+    placeToolbar(addTb, rect.left, rect.top - 36);
+  }else{
+    hideToolbars();
+  }
+});
+
+document.getElementById('addHL').addEventListener('click',()=>{
+  if(!selectionRange) return;
+  const span = wrapSelection(selectionRange);
+  hideToolbars();
+  try{window.getSelection().removeAllRanges();}catch(_){}
+  selectionRange=null;
+});
+
+document.addEventListener('click',(e)=>{
+  if(e.target.classList && e.target.classList.contains('hl')){
+    currentHL = e.target;
+    const rect = currentHL.getBoundingClientRect();
+    placeToolbar(rmTb, rect.right + 6, rect.top);
+  }else if(!e.target.closest('.mini-toolbar')){
+    rmTb.style.display='none';
+  }
+});
+
+document.getElementById('removeHL').addEventListener('click',()=>{
+  if(currentHL){ unwrap(currentHL); currentHL=null; }
+  rmTb.style.display='none';
+});
+
+/* ---------- Part switching & listeners ---------- */
+function showPart(n){
+  document.querySelectorAll('.test-part').forEach((s, i) => {
+    s.classList.toggle('active', i === n - 1);
+  });
+  document.querySelectorAll('.sub-nav').forEach((nav, i) => {
+    nav.style.display = (i === n - 1) ? 'flex' : 'none';
+  });
+  try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (_) {}
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  (function disableAutocomplete(){
+    const els = document.querySelectorAll('.text-input, textarea');
+    els.forEach(el => {
+      el.setAttribute('autocomplete','off');
+      el.setAttribute('autocorrect','off');
+      el.setAttribute('autocapitalize','off');
+      el.setAttribute('spellcheck','false');
+      const base = (el.getAttribute('id') || 'fld');
+      el.setAttribute('name', base + '_' + Math.random().toString(36).slice(2));
+      el.setAttribute('readonly', 'readonly');
+      el.addEventListener('pointerdown', () => { el.removeAttribute('readonly'); }, { once: true });
+      el.addEventListener('focus', () => { el.removeAttribute('readonly'); }, { once: true });
+    });
+  })();
+
+  document.querySelectorAll('.nav-btn').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      e.preventDefault();
+      const q=parseInt(btn.dataset.q,10);
+      const part = q<=10?1 : q<=20?2 : q<=30?3 : 4;
+      showPart(part);
+      const target=document.getElementById(btn.getAttribute('href').substring(1));
+      if(target) target.scrollIntoView({behavior:'smooth',block:'center'});
+    });
+  });
+
+  document.querySelectorAll('.text-input').forEach(i=>i.addEventListener('input',updateProgress));
+  document.querySelectorAll('input[type="radio"]').forEach(r=>r.addEventListener('change',updateProgress));
+  initDrag('opts15');
+  ['g1','g2','g3'].forEach(initTwoOfFive);
+  document.getElementById('submit-btn').addEventListener('click',submitAnswers);
+  updateProgress();
+  showPart(1);
+});
+</script>
+</body>
+</html>
