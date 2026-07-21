@@ -173,8 +173,10 @@ header.nav.scrolled{box-shadow:0 10px 30px -18px rgba(16,41,79,.3);border-color:
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:30px 24px;text-align:center;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
 .stat::after{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad)}
-.stat b{font-family:'Plus Jakarta Sans';font-size:clamp(2rem,4vw,2.8rem);font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;display:block}
-.stat span{color:var(--muted);font-weight:600;font-size:.95rem}
+.stat-ic{width:54px;height:54px;margin:0 auto 15px;border-radius:16px;background:linear-gradient(135deg,var(--cyan),var(--cyan-dd));display:grid;place-items:center;box-shadow:0 12px 26px -12px rgba(10,143,212,.65)}
+.stat-ic svg{width:25px;height:25px;color:#fff}
+.stat b{font-family:'Plus Jakarta Sans';font-size:1.18rem;font-weight:800;color:var(--ink);display:block;margin-bottom:4px}
+.stat span{color:var(--muted);font-weight:500;font-size:.9rem}
 @media(max-width:720px){.stats-grid{grid-template-columns:1fr 1fr}}
 
 /* courses */
@@ -218,6 +220,7 @@ header.nav.scrolled{box-shadow:0 10px 30px -18px rgba(16,41,79,.3);border-color:
 .res .ring{width:96px;height:96px;margin:0 auto 14px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--cyan) var(--p),var(--bg-soft2) 0);position:relative}
 .res .ring::before{content:"";position:absolute;inset:9px;background:var(--card);border-radius:50%}
 .res .ring b{position:relative;font-family:'Plus Jakarta Sans';font-size:1.5rem;font-weight:800;color:var(--navy)}
+.res .ring svg{position:relative;width:32px;height:32px;color:var(--cyan-dd)}
 [data-theme="dark"] .res .ring b{color:#eaf1fb}
 .res h4{font-size:1.02rem;font-weight:700;margin-bottom:3px}
 .res span{color:var(--muted);font-size:.85rem}
@@ -429,7 +432,6 @@ footer ul a:hover{color:#fff}
       <a href="#why" data-i18n="nav.why">Nega biz</a>
       <a href="#results" data-i18n="nav.results">Natijalar</a>
       <a href="#mock" data-i18n="nav.mock">Mock testlar</a>
-      <a href="#teachers" data-i18n="nav.teachers">Ustozlar</a>
       <a href="#contact" data-i18n="nav.contact">Aloqa</a>
       <a href="#contact" class="btn btn-primary nav-cta-mob" data-i18n="nav.cta">Bepul sinov dars</a>
     </nav>
@@ -469,15 +471,15 @@ footer ul a:hover{color:#fff}
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.rr3">5 daqiqada javob</span></span>
       </div>
       <div class="hero-mini">
-        <div class="m"><b data-count="500">500+</b><span data-i18n="hero.m1">Bitiruvchi o'quvchi</span></div>
-        <div class="m"><b data-count="10">10+</b><span data-i18n="hero.m2">Tajribali ustoz</span></div>
-        <div class="m"><b>7.0+</b><span data-i18n="hero.m3">O'rtacha IELTS ball</span></div>
+        <div class="m"><b>IELTS</b><span data-i18n="hero.m1">maqsadli tayyorgarlik</span></div>
+        <div class="m"><b>Kids</b><span data-i18n="hero.m2">6–12 yosh uchun</span></div>
+        <div class="m"><b>Speaking</b><span data-i18n="hero.m3">jonli amaliyot</span></div>
       </div>
     </div>
 
     <div class="hero-visual">
       <div class="float-badge fb-1"><div class="fb-ic" style="background:var(--grad)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></div><div><span style="display:block;font-size:.72rem;color:var(--muted);font-weight:600" data-i18n="hero.fb1a">Bepul</span><span data-i18n="hero.fb1b">Sinov dars</span></div></div>
-      <div class="float-badge fb-2"><div class="fb-ic" style="background:#ffb020"><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.9 7.5.6-5.7 4.9 1.8 7.3L12 17.8 5.4 21.7l1.8-7.3L1.5 9.5 9 8.9z"/></svg></div><div><span style="display:block;font-size:.72rem;color:var(--muted);font-weight:600">4.9 / 5</span><span data-i18n="hero.fb2">O'quvchilar bahosi</span></div></div>
+      <div class="float-badge fb-2"><div class="fb-ic" style="background:var(--grad)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9"/></svg></div><div><span style="display:block;font-size:.72rem;color:var(--muted);font-weight:600" data-i18n="hero.fb2a">Kichik guruh</span><span data-i18n="hero.fb2">8–12 kishi</span></div></div>
       <div class="glass-card">
         <div class="gc-logo">
           <svg viewBox="0 0 258 60" xmlns="http://www.w3.org/2000/svg">
@@ -510,10 +512,10 @@ footer ul a:hover{color:#fff}
 <section class="stats pad">
   <div class="wrap">
     <div class="stats-grid">
-      <div class="stat reveal"><b data-count="500">0</b><span data-i18n="stat.1">Bitiruvchi o'quvchi</span></div>
-      <div class="stat reveal d1"><b data-count="8">0</b><span data-i18n="stat.2">Yillik tajriba</span></div>
-      <div class="stat reveal d2"><b data-count="95" data-suffix="%">0</b><span data-i18n="stat.3">Mamnun o'quvchi</span></div>
-      <div class="stat reveal d3"><b data-count="10">0</b><span data-i18n="stat.4">Tajribali ustoz</span></div>
+      <div class="stat reveal"><div class="stat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg></div><b data-i18n="stat.1t">Bepul sinov dars</b><span data-i18n="stat.1">Birinchi dars mutlaqo bepul</span></div>
+      <div class="stat reveal d1"><div class="stat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9"/></svg></div><b data-i18n="stat.2t">Kichik guruhlar</b><span data-i18n="stat.2">8–12 kishilik guruhlar</span></div>
+      <div class="stat reveal d2"><div class="stat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.6L5.7 21.4 8 14 2 9.4h7.6z"/></svg></div><b data-i18n="stat.3t">Barcha darajalar</b><span data-i18n="stat.3">A1 dan C1 gacha + IELTS</span></div>
+      <div class="stat reveal d3"><div class="stat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><b data-i18n="stat.4t">Qulay joylashuv</b><span data-i18n="stat.4">Mirzo Ulug'bek, Qorasuv-6</span></div>
     </div>
   </div>
 </section>
@@ -577,7 +579,7 @@ footer ul a:hover{color:#fff}
 <section class="why pad" id="why">
   <div class="wrap why-grid">
     <div class="why-art reveal">
-      <div class="wa-badge"><b>95%</b><span data-i18n="why.badge">o'quvchilarimiz kursni tavsiya qiladi</span></div>
+      <div class="wa-badge"><b data-i18n="why.badge2">Bepul</b><span data-i18n="why.badge">birinchi sinov dars — majburiyatsiz</span></div>
       <p class="wa-quote" data-i18n="why.quote">"CTN — bu shunchaki kurs emas, balki tilni sevib o'rganadigan muhit."</p>
     </div>
     <div class="why-copy">
@@ -603,10 +605,10 @@ footer ul a:hover{color:#fff}
       <p data-i18n="res.sub">Raqamlar biz haqimizda gapiradi — mehnat va to'g'ri metodika samarasi.</p>
     </div>
     <div class="results-grid">
-      <div class="res reveal"><div class="ring" style="--p:252deg"><b>7.0+</b></div><h4 data-i18n="r1.t">O'rtacha IELTS</h4><span data-i18n="r1.s">bitiruvchilar bo'yicha</span></div>
-      <div class="res reveal d1"><div class="ring" style="--p:342deg"><b>95%</b></div><h4 data-i18n="r2.t">Maqsadga erishish</h4><span data-i18n="r2.s">rejadagi darajaga</span></div>
-      <div class="res reveal d2"><div class="ring" style="--p:324deg"><b>90%</b></div><h4 data-i18n="r3.t">Davom etish</h4><span data-i18n="r3.s">keyingi bosqichga</span></div>
-      <div class="res reveal d3"><div class="ring" style="--p:353deg"><b>4.9</b></div><h4 data-i18n="r4.t">O'rtacha baho</h4><span data-i18n="r4.s">o'quvchilar fikri</span></div>
+      <div class="res reveal"><div class="ring" style="--p:360deg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l19-9-9 19-2-8z"/></svg></div><h4 data-i18n="r1.t">Ravon gapirish</h4><span data-i18n="r1.s">erkin, qo'rquvsiz muloqot</span></div>
+      <div class="res reveal d1"><div class="ring" style="--p:360deg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg></div><h4 data-i18n="r2.t">IELTS maqsadli ball</h4><span data-i18n="r2.s">imtihonga to'liq tayyorgarlik</span></div>
+      <div class="res reveal d2"><div class="ring" style="--p:360deg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><h4 data-i18n="r3.t">Mustahkam poydevor</h4><span data-i18n="r3.s">grammatika va lug'at</span></div>
+      <div class="res reveal d3"><div class="ring" style="--p:360deg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div><h4 data-i18n="r4.t">Real hayotiy ingliz</h4><span data-i18n="r4.s">ish va safar uchun</span></div>
     </div>
   </div>
 </section>
@@ -637,39 +639,6 @@ footer ul a:hover{color:#fff}
         <div class="mu-opt"><i></i>Numbers declined sharply.</div>
       </div>
       <div class="mu-bar"><span></span></div>
-    </div>
-  </div>
-</section>
-
-<!-- TEACHERS -->
-<section class="pad" id="teachers">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow" data-i18n="team.eyebrow">Jamoa</span>
-      <h2 data-i18n="team.title">Sizni o'qitadigan ustozlar</h2>
-      <p data-i18n="team.sub">Har biri o'z sohasida tajribali, o'quvchiga natija bergani uchun mas'ul.</p>
-    </div>
-    <div class="teachers-grid">
-      <div class="teacher reveal"><div class="t-photo" style="background:linear-gradient(150deg,#16C0F0,#0876B5)"><span class="initials">A</span></div><div class="t-body"><h4 data-i18n="t1.n">Aziza opa</h4><div class="role" data-i18n="t1.r">IELTS mutaxassisi</div><div class="t-tags"><span class="tag">IELTS 8.0</span><span class="tag">CELTA</span></div></div></div>
-      <div class="teacher reveal d1"><div class="t-photo" style="background:linear-gradient(150deg,#7C4DFF,#4527A0)"><span class="initials">B</span></div><div class="t-body"><h4 data-i18n="t2.n">Bekzod aka</h4><div class="role" data-i18n="t2.r">General English</div><div class="t-tags"><span class="tag">C1</span><span class="tag" data-i18n="t2.tag">5 yil</span></div></div></div>
-      <div class="teacher reveal d2"><div class="t-photo" style="background:linear-gradient(150deg,#FF7043,#C63A1E)"><span class="initials">M</span></div><div class="t-body"><h4 data-i18n="t3.n">Malika opa</h4><div class="role" data-i18n="t3.r">Kids & Teens</div><div class="t-tags"><span class="tag" data-i18n="t3.tag">Bolalar</span><span class="tag">TKT</span></div></div></div>
-      <div class="teacher reveal d3"><div class="t-photo" style="background:linear-gradient(150deg,#26A69A,#00695C)"><span class="initials">S</span></div><div class="t-body"><h4 data-i18n="t4.n">Sardor aka</h4><div class="role" data-i18n="t4.r">Speaking Club</div><div class="t-tags"><span class="tag" data-i18n="t4.tag">Amaliyot</span><span class="tag">C2</span></div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="tst pad">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow" data-i18n="rev.eyebrow">Fikrlar</span>
-      <h2 data-i18n="rev.title">O'quvchilarimiz nima deydi</h2>
-      <p data-i18n="rev.sub">Eng yaxshi baho — bitiruvchilarimizning haqiqiy natijalari va so'zlari.</p>
-    </div>
-    <div class="tst-track">
-      <div class="tst-card reveal"><div class="stars">★★★★★</div><p data-i18n="rev1.q">"Noldan boshlagan edim, bir yilda IELTS 7.0 oldim. Ustozlar juda e'tiborli, guruh kichik bo'lgani uchun har darsda gapirish imkoni bor edi."</p><div class="tst-who"><div class="av" style="background:linear-gradient(135deg,#16C0F0,#0876B5)">D</div><div><b data-i18n="rev1.n">Dilnoza R.</b><span data-i18n="rev1.r">IELTS 7.0 · bitiruvchi</span></div></div></div>
-      <div class="tst-card reveal d1"><div class="stars">★★★★★</div><p data-i18n="rev2.q">"Farzandim Kids guruhida o'qiydi va inglizchani sevib qoldi. O'yin orqali o'rgatishadi, natija ko'zga tashlanadi."</p><div class="tst-who"><div class="av" style="background:linear-gradient(135deg,#FF7043,#C63A1E)">N</div><div><b data-i18n="rev2.n">Nigora A.</b><span data-i18n="rev2.r">Kids guruhi ota-onasi</span></div></div></div>
-      <div class="tst-card reveal d2"><div class="stars">★★★★★</div><p data-i18n="rev3.q">"Speaking Club menga gapirishdagi qo'rquvni yengishga yordam berdi. Endi ishda inglizcha muloqot qilaman."</p><div class="tst-who"><div class="av" style="background:linear-gradient(135deg,#26A69A,#00695C)">J</div><div><b data-i18n="rev3.n">Jahongir T.</b><span data-i18n="rev3.r">Business English</span></div></div></div>
     </div>
   </div>
 </section>
@@ -801,12 +770,12 @@ const I18N={
   "nav.courses":"Kurslar","nav.why":"Nega biz","nav.results":"Natijalar","nav.mock":"Mock testlar","nav.teachers":"Ustozlar","nav.contact":"Aloqa","nav.cta":"Bepul sinov dars",
   "hero.badge":"🔥 Yangi guruhlarga yozilish ochiq","hero.t1":"Ingliz tilini","hero.t2":"CTN","hero.t3":"bilan puxta o'rganing",
   "hero.lead":"Tajribali ustozlar, kichik guruhlar va zamonaviy metodika bilan noldan ravon gapirishgacha. IELTS, Kids va Speaking yo'nalishlari.",
-  "hero.cta1":"Bepul sinov darsga yozilish","hero.cta2":"Kurslarni ko'rish","hero.m1":"Bitiruvchi o'quvchi","hero.m2":"Tajribali ustoz","hero.m3":"O'rtacha IELTS ball",
+  "hero.cta1":"Bepul sinov darsga yozilish","hero.cta2":"Kurslarni ko'rish","hero.m1":"maqsadli tayyorgarlik","hero.m2":"6–12 yosh uchun","hero.m3":"jonli amaliyot",
   "hero.rr1":"Birinchi dars bepul","hero.rr2":"Hech qanday majburiyat yo'q","hero.rr3":"5 daqiqada javob","mcta.call":"Qo'ng'iroq","mcta.book":"Bepul sinov dars",
-  "hero.fb1a":"Bepul","hero.fb1b":"Sinov dars","hero.fb2":"O'quvchilar bahosi",
+  "hero.fb1a":"Bepul","hero.fb1b":"Sinov dars","hero.fb2a":"Kichik guruh","hero.fb2":"8–12 kishi",
   "gc.r1a":"General English","gc.r1b":"A1 dan C1 darajagacha","gc.r2a":"IELTS Intensive","gc.r2b":"Maqsadli natija uchun","gc.r3a":"Speaking Club","gc.r3b":"Har hafta jonli amaliyot",
   "strip.1":"Sertifikatli ustozlar","strip.2":"Kichik guruhlar (8-12)","strip.3":"Zamonaviy metodika","strip.4":"Natija monitoringi",
-  "stat.1":"Bitiruvchi o'quvchi","stat.2":"Yillik tajriba","stat.3":"Mamnun o'quvchi","stat.4":"Tajribali ustoz",
+  "stat.1t":"Bepul sinov dars","stat.1":"Birinchi dars mutlaqo bepul","stat.2t":"Kichik guruhlar","stat.2":"8–12 kishilik guruhlar","stat.3t":"Barcha darajalar","stat.3":"A1 dan C1 gacha + IELTS","stat.4t":"Qulay joylashuv","stat.4":"Mirzo Ulug'bek, Qorasuv-6",
   "courses.eyebrow":"Yo'nalishlar","courses.title":"Har bir maqsad uchun kurs","courses.sub":"Yoshingiz va darajangizga mos yo'nalishni tanlang — ustozlarimiz qolganini hal qiladi.",
   "c1.t":"General English","c1.d":"Grammatika, lug'at, o'qish, tinglash va gapirish — to'liq umumiy ingliz tili A1 dan C1 gacha.",
   "c2.t":"IELTS Intensive","c2.d":"4 ta ko'nikma bo'yicha maqsadli tayyorgarlik, real mock imtihonlar va band score strategiyalari.",
@@ -816,10 +785,10 @@ const I18N={
   "c6.t":"Business English","c6.d":"Ish, biznes yozishmalari va prezentatsiyalar uchun amaliy professional ingliz tili.",
   "c.more":"Batafsil","c.tag.age1":"14+ yosh","c.tag.exam":"Imtihon","c.tag.kids":"Bolalar","c.tag.weekly":"Har hafta","c.tag.practice":"Amaliyot","c.tag.school":"Maktab+","c.tag.pro":"Professional","c.tag.adult":"Kattalar",
   "why.eyebrow":"Nega CTN","why.title":"Natijaga yo'naltirilgan ta'lim","why.sub":"Biz har bir o'quvchining maqsadidan kelib chiqib ishlaymiz — noldan boshlab ravon gapirishgacha aniq yo'l xaritasi bilan.",
-  "why.badge":"o'quvchilarimiz kursni tavsiya qiladi","why.quote":"\"CTN — bu shunchaki kurs emas, balki tilni sevib o'rganadigan muhit.\"",
+  "why.badge":"birinchi sinov dars — majburiyatsiz","why.badge2":"Bepul","why.quote":"\"CTN — bu shunchaki kurs emas, balki tilni sevib o'rganadigan muhit.\"",
   "f1.t":"Tajribali ustozlar","f1.d":"Sertifikatli va amaliyotchi o'qituvchilar.","f2.t":"Kichik guruhlar","f2.d":"Har bir o'quvchiga alohida e'tibor.","f3.t":"Ko'p amaliyot","f3.d":"Speaking va real vaziyatlarga urg'u.","f4.t":"Progress nazorati","f4.d":"Muntazam test va fikr-mulohaza.",
-  "res.eyebrow":"Natijalar","res.title":"Bizning o'quvchilar erishgan natijalar","res.sub":"Raqamlar biz haqimizda gapiradi — mehnat va to'g'ri metodika samarasi.",
-  "r1.t":"O'rtacha IELTS","r1.s":"bitiruvchilar bo'yicha","r2.t":"Maqsadga erishish","r2.s":"rejadagi darajaga","r3.t":"Davom etish","r3.s":"keyingi bosqichga","r4.t":"O'rtacha baho","r4.s":"o'quvchilar fikri",
+  "res.eyebrow":"Natija","res.title":"Siz nimalarga erishasiz","res.sub":"CTN'da o'qib, real hayotda ishlatadigan ingliz tilingiz shakllanadi.",
+  "r1.t":"Ravon gapirish","r1.s":"erkin, qo'rquvsiz muloqot","r2.t":"IELTS maqsadli ball","r2.s":"imtihonga to'liq tayyorgarlik","r3.t":"Mustahkam poydevor","r3.s":"grammatika va lug'at","r4.t":"Real hayotiy ingliz","r4.s":"ish va safar uchun",
   "mock.soon":"⚡ TEZ ORADA","mock.title":"CTN Mock — real IELTS imtihoni tajribasi","mock.sub":"Onlayn platformamizda haqiqiy imtihon sharoitida mock test topshiring — Listening, Reading, Writing va Speaking bo'yicha darhol natija va tahlil bilan.",
   "mock.f1":"Real imtihon interfeysi va taymer","mock.f2":"Avtomatik baholash va band score","mock.f3":"Xatolar tahlili va tavsiyalar","mock.cta":"Ishga tushganda xabar bering",
   "team.eyebrow":"Jamoa","team.title":"Sizni o'qitadigan ustozlar","team.sub":"Har biri o'z sohasida tajribali, o'quvchiga natija bergani uchun mas'ul.",
@@ -847,12 +816,12 @@ const I18N={
   "nav.courses":"Курсы","nav.why":"Почему мы","nav.results":"Результаты","nav.mock":"Mock тесты","nav.teachers":"Преподаватели","nav.contact":"Контакты","nav.cta":"Бесплатный урок",
   "hero.badge":"🔥 Идёт набор в новые группы","hero.t1":"Изучайте английский","hero.t2":"с CTN","hero.t3":"основательно",
   "hero.lead":"Опытные преподаватели, малые группы и современная методика — от нуля до свободной речи. IELTS, Kids и Speaking.",
-  "hero.cta1":"Записаться на бесплатный урок","hero.cta2":"Смотреть курсы","hero.m1":"Выпускников","hero.m2":"Преподавателей","hero.m3":"Средний балл IELTS",
+  "hero.cta1":"Записаться на бесплатный урок","hero.cta2":"Смотреть курсы","hero.m1":"целевая подготовка","hero.m2":"для 6–12 лет","hero.m3":"живая практика",
   "hero.rr1":"Первый урок бесплатно","hero.rr2":"Без обязательств","hero.rr3":"Ответим за 5 минут","mcta.call":"Позвонить","mcta.book":"Бесплатный урок",
-  "hero.fb1a":"Бесплатно","hero.fb1b":"Пробный урок","hero.fb2":"Оценка учеников",
+  "hero.fb1a":"Бесплатно","hero.fb1b":"Пробный урок","hero.fb2a":"Малые группы","hero.fb2":"8–12 человек",
   "gc.r1a":"General English","gc.r1b":"От A1 до C1","gc.r2a":"IELTS Intensive","gc.r2b":"Для целевого результата","gc.r3a":"Speaking Club","gc.r3b":"Живая практика каждую неделю",
   "strip.1":"Сертифицированные педагоги","strip.2":"Малые группы (8-12)","strip.3":"Современная методика","strip.4":"Мониторинг результатов",
-  "stat.1":"Выпускников","stat.2":"Лет опыта","stat.3":"Довольных учеников","stat.4":"Преподавателей",
+  "stat.1t":"Бесплатный урок","stat.1":"Первый урок совершенно бесплатно","stat.2t":"Малые группы","stat.2":"группы по 8–12 человек","stat.3t":"Все уровни","stat.3":"от A1 до C1 + IELTS","stat.4t":"Удобное расположение","stat.4":"Мирзо-Улугбек, Карасу-6",
   "courses.eyebrow":"Направления","courses.title":"Курс под каждую цель","courses.sub":"Выберите направление по возрасту и уровню — остальное сделают наши преподаватели.",
   "c1.t":"General English","c1.d":"Грамматика, лексика, чтение, аудирование и речь — полный общий английский от A1 до C1.",
   "c2.t":"IELTS Intensive","c2.d":"Целевая подготовка по 4 навыкам, реальные mock-экзамены и стратегии band score.",
@@ -862,10 +831,10 @@ const I18N={
   "c6.t":"Business English","c6.d":"Практический профессиональный английский для работы, переписки и презентаций.",
   "c.more":"Подробнее","c.tag.age1":"14+ лет","c.tag.exam":"Экзамен","c.tag.kids":"Дети","c.tag.weekly":"Еженедельно","c.tag.practice":"Практика","c.tag.school":"Школа+","c.tag.pro":"Профи","c.tag.adult":"Взрослые",
   "why.eyebrow":"Почему CTN","why.title":"Обучение, ориентированное на результат","why.sub":"Мы работаем от цели каждого ученика — с чёткой дорожной картой от нуля до свободной речи.",
-  "why.badge":"учеников рекомендуют курс","why.quote":"\"CTN — это не просто курс, а среда, где язык учат с удовольствием.\"",
+  "why.badge":"первый пробный урок — без обязательств","why.badge2":"Бесплатно","why.quote":"\"CTN — это не просто курс, а среда, где язык учат с удовольствием.\"",
   "f1.t":"Опытные педагоги","f1.d":"Сертифицированные практикующие преподаватели.","f2.t":"Малые группы","f2.d":"Индивидуальное внимание каждому.","f3.t":"Много практики","f3.d":"Упор на speaking и реальные ситуации.","f4.t":"Контроль прогресса","f4.d":"Регулярные тесты и обратная связь.",
-  "res.eyebrow":"Результаты","res.title":"Результаты наших учеников","res.sub":"Цифры говорят за нас — итог труда и правильной методики.",
-  "r1.t":"Средний IELTS","r1.s":"среди выпускников","r2.t":"Достижение цели","r2.s":"до нужного уровня","r3.t":"Продолжают","r3.s":"на следующий этап","r4.t":"Средняя оценка","r4.s":"отзывы учеников",
+  "res.eyebrow":"Результат","res.title":"Что вы получите","res.sub":"В CTN формируется английский, который вы используете в реальной жизни.",
+  "r1.t":"Свободная речь","r1.s":"общение без страха","r2.t":"Целевой балл IELTS","r2.s":"полная подготовка к экзамену","r3.t":"Прочная база","r3.s":"грамматика и лексика","r4.t":"Живой английский","r4.s":"для работы и путешествий",
   "mock.soon":"⚡ СКОРО","mock.title":"CTN Mock — опыт настоящего IELTS","mock.sub":"Сдавайте mock-тест в условиях реального экзамена на нашей онлайн-платформе — Listening, Reading, Writing и Speaking с мгновенным результатом и анализом.",
   "mock.f1":"Реальный интерфейс экзамена и таймер","mock.f2":"Автопроверка и band score","mock.f3":"Разбор ошибок и рекомендации","mock.cta":"Сообщить о запуске",
   "team.eyebrow":"Команда","team.title":"Преподаватели, которые вас обучат","team.sub":"Каждый опытен в своём направлении и отвечает за результат ученика.",
@@ -893,12 +862,12 @@ const I18N={
   "nav.courses":"Courses","nav.why":"Why us","nav.results":"Results","nav.mock":"Mock tests","nav.teachers":"Teachers","nav.contact":"Contact","nav.cta":"Free trial lesson",
   "hero.badge":"🔥 Enrollment open for new groups","hero.t1":"Master English","hero.t2":"with CTN","hero.t3":"the right way",
   "hero.lead":"Experienced teachers, small groups and a modern methodology — from zero to fluent. IELTS, Kids and Speaking tracks.",
-  "hero.cta1":"Book a free trial lesson","hero.cta2":"Explore courses","hero.m1":"Graduates","hero.m2":"Expert teachers","hero.m3":"Average IELTS score",
+  "hero.cta1":"Book a free trial lesson","hero.cta2":"Explore courses","hero.m1":"targeted prep","hero.m2":"for ages 6–12","hero.m3":"live practice",
   "hero.rr1":"First lesson free","hero.rr2":"No commitment","hero.rr3":"We reply in 5 min","mcta.call":"Call","mcta.book":"Free trial lesson",
-  "hero.fb1a":"Free","hero.fb1b":"Trial lesson","hero.fb2":"Student rating",
+  "hero.fb1a":"Free","hero.fb1b":"Trial lesson","hero.fb2a":"Small groups","hero.fb2":"8–12 students",
   "gc.r1a":"General English","gc.r1b":"From A1 to C1","gc.r2a":"IELTS Intensive","gc.r2b":"For your target score","gc.r3a":"Speaking Club","gc.r3b":"Live practice every week",
   "strip.1":"Certified teachers","strip.2":"Small groups (8-12)","strip.3":"Modern methodology","strip.4":"Progress monitoring",
-  "stat.1":"Graduates","stat.2":"Years of experience","stat.3":"Happy students","stat.4":"Expert teachers",
+  "stat.1t":"Free trial lesson","stat.1":"Your first lesson is completely free","stat.2t":"Small groups","stat.2":"groups of 8–12 students","stat.3t":"All levels","stat.3":"from A1 to C1 + IELTS","stat.4t":"Convenient location","stat.4":"Mirzo Ulugbek, Karasu-6",
   "courses.eyebrow":"Programs","courses.title":"A course for every goal","courses.sub":"Pick the track for your age and level — our teachers handle the rest.",
   "c1.t":"General English","c1.d":"Grammar, vocabulary, reading, listening and speaking — full general English from A1 to C1.",
   "c2.t":"IELTS Intensive","c2.d":"Targeted prep across 4 skills, real mock exams and band score strategies.",
@@ -908,10 +877,10 @@ const I18N={
   "c6.t":"Business English","c6.d":"Practical professional English for work, business writing and presentations.",
   "c.more":"Learn more","c.tag.age1":"14+","c.tag.exam":"Exam","c.tag.kids":"Kids","c.tag.weekly":"Weekly","c.tag.practice":"Practice","c.tag.school":"School+","c.tag.pro":"Professional","c.tag.adult":"Adults",
   "why.eyebrow":"Why CTN","why.title":"Results-driven education","why.sub":"We work from each student's goal — with a clear roadmap from zero to fluent speech.",
-  "why.badge":"of our students recommend the course","why.quote":"\"CTN isn't just a course — it's an environment where you fall in love with the language.\"",
+  "why.badge":"first trial lesson — no commitment","why.badge2":"Free","why.quote":"\"CTN isn't just a course — it's an environment where you fall in love with the language.\"",
   "f1.t":"Experienced teachers","f1.d":"Certified, practising instructors.","f2.t":"Small groups","f2.d":"Individual attention for everyone.","f3.t":"Lots of practice","f3.d":"Focus on speaking and real situations.","f4.t":"Progress tracking","f4.d":"Regular tests and feedback.",
-  "res.eyebrow":"Results","res.title":"What our students achieve","res.sub":"The numbers speak for us — the fruit of hard work and the right methodology.",
-  "r1.t":"Average IELTS","r1.s":"among graduates","r2.t":"Goal reached","r2.s":"to target level","r3.t":"Continue","r3.s":"to the next stage","r4.t":"Average rating","r4.s":"student reviews",
+  "res.eyebrow":"Outcome","res.title":"What you'll achieve","res.sub":"At CTN you build English you'll actually use in real life.",
+  "r1.t":"Fluent speaking","r1.s":"confident, fear-free","r2.t":"Target IELTS score","r2.s":"full exam preparation","r3.t":"Strong foundation","r3.s":"grammar and vocabulary","r4.t":"Real-life English","r4.s":"for work and travel",
   "mock.soon":"⚡ COMING SOON","mock.title":"CTN Mock — the real IELTS experience","mock.sub":"Take a mock test under real exam conditions on our online platform — Listening, Reading, Writing and Speaking with instant results and analysis.",
   "mock.f1":"Real exam interface and timer","mock.f2":"Auto-grading and band score","mock.f3":"Mistake analysis and tips","mock.cta":"Notify me at launch",
   "team.eyebrow":"Team","team.title":"The teachers who'll teach you","team.sub":"Each experienced in their field and accountable for student results.",
