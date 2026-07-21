@@ -17,16 +17,18 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314B4E6'/%3E%3Ctext x='7' y='44' font-family='Arial' font-size='30' font-weight='900' fill='%23132a52'%3ECTN%3C/text%3E%3Cellipse cx='40' cy='30' rx='19' ry='10' fill='none' stroke='white' stroke-width='4' transform='rotate(-20 40 30)'/%3E%3C/svg%3E">
 <style>
 :root{
-  --cyan:#12B4E6; --cyan-d:#0A93D4; --cyan-dd:#0876B5;
-  --navy:#16294F; --navy-2:#0E1C3B; --navy-3:#0A1730;
-  --ink:#12213F; --muted:#5b6b86; --line:#e6ebf3;
-  --bg:#ffffff; --bg-soft:#f5f8fc; --bg-soft2:#eef4fb; --card:#ffffff;
-  --shadow:0 18px 50px -20px rgba(16,41,79,.28);
-  --shadow-sm:0 8px 24px -12px rgba(16,41,79,.22);
-  --radius:22px; --radius-sm:14px;
-  --grad:linear-gradient(135deg,#16C0F0 0%,#0A93D4 55%,#0876B5 100%);
+  --cyan:#13B5E8; --cyan-d:#0A8FD4; --cyan-dd:#0A74BC;
+  --navy:#132C57; --navy-2:#0b1d40; --navy-3:#071227;
+  --ink:#0e1d38; --muted:#5b6a85; --line:#e8edf5;
+  --bg:#ffffff; --bg-soft:#f4f7fc; --bg-soft2:#e9f1fb; --card:#ffffff;
+  --amber:#f5a623;
+  --shadow:0 26px 64px -28px rgba(11,29,64,.34);
+  --shadow-sm:0 12px 30px -16px rgba(11,29,64,.22);
+  --shadow-glow:0 20px 50px -18px rgba(10,143,212,.45);
+  --radius:24px; --radius-sm:15px;
+  --grad:linear-gradient(135deg,#1BC5F0 0%,#0C97DB 50%,#0A74C0 100%);
   --grad-navy:linear-gradient(160deg,#16294F 0%,#0E1C3B 100%);
-  --maxw:1200px;
+  --maxw:1180px;
 }
 [data-theme="dark"]{
   --ink:#eaf1fb; --muted:#9db0cd; --line:#20304e;
@@ -35,8 +37,9 @@
   --shadow-sm:0 10px 30px -14px rgba(0,0,0,.5);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;overflow-x:hidden;transition:background .3s,color .3s}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;overflow-x:clip;max-width:100vw;transition:background .3s,color .3s}
+*{min-width:0}
 h1,h2,h3,h4,.display{font-family:'Plus Jakarta Sans','Inter',sans-serif;line-height:1.12;letter-spacing:-.02em;color:var(--ink)}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
@@ -71,7 +74,8 @@ section{position:relative}
 .topbar .t-left{display:flex;gap:22px;align-items:center}
 .topbar .t-right{display:flex;gap:16px;align-items:center}
 .topbar svg{width:15px;height:15px;opacity:.9}
-@media(max-width:760px){.topbar .t-left a span{display:none}.topbar .wrap{height:40px}}
+@media(max-width:760px){.topbar .t-addr{display:none}.topbar .t-right{gap:14px}.topbar .wrap{height:40px}}
+@media(max-width:430px){.topbar{font-size:.8rem}.topbar .t-right a:last-child{display:none}}
 
 /* header/nav */
 header.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid transparent;transition:box-shadow .3s,border-color .3s,background .3s}
@@ -84,6 +88,7 @@ header.nav.scrolled{box-shadow:0 10px 30px -18px rgba(16,41,79,.3);border-color:
 .nav-links{display:flex;align-items:center;gap:6px}
 .nav-links a{padding:10px 14px;border-radius:12px;font-weight:600;font-size:.95rem;color:var(--muted);transition:color .2s,background .2s}
 .nav-links a:hover{color:var(--ink);background:var(--bg-soft)}
+.nav-cta-mob{display:none}
 .nav-tools{display:flex;align-items:center;gap:12px}
 .lang{display:flex;background:var(--bg-soft);border:1px solid var(--line);border-radius:40px;padding:3px}
 .lang button{border:0;background:none;font-family:inherit;font-weight:700;font-size:.78rem;color:var(--muted);padding:6px 11px;border-radius:40px;cursor:pointer;transition:.2s}
@@ -94,17 +99,35 @@ header.nav.scrolled{box-shadow:0 10px 30px -18px rgba(16,41,79,.3);border-color:
 .moon{display:none}[data-theme="dark"] .sun{display:none}[data-theme="dark"] .moon{display:block}
 .burger{display:none}
 @media(max-width:1000px){
-  .nav-links{position:fixed;inset:72px 0 auto 0;flex-direction:column;background:var(--bg);padding:16px 22px 26px;gap:4px;border-bottom:1px solid var(--line);box-shadow:var(--shadow);transform:translateY(-140%);transition:transform .35s;align-items:stretch;z-index:49}
+  .nav-in{height:64px;gap:8px}
+  .nav-links{position:fixed;inset:64px 0 auto 0;flex-direction:column;background:var(--bg);padding:16px 18px 24px;gap:4px;border-bottom:1px solid var(--line);box-shadow:var(--shadow);transform:translateY(-160%);transition:transform .35s;align-items:stretch;z-index:49}
   .nav-links.open{transform:translateY(0)}
   .nav-links a{padding:14px;font-size:1.05rem}
-  .nav-cta-mob{margin-top:10px}
+  .nav-links a.nav-cta-mob{display:inline-flex;color:#fff;margin-top:12px;justify-content:center}
   .burger{display:grid;place-items:center}
   .desk-cta{display:none}
+  .nav-tools{gap:7px}
+  .brand-svg{height:29px}
+  .lang{padding:2px}
+  .lang button{padding:6px 8px;font-size:.72rem}
+  .icon-btn{width:38px;height:38px}
+}
+@media(max-width:400px){
+  .brand-svg{height:26px}
+  .lang button{padding:5px 6px;font-size:.68rem}
+  .icon-btn{width:36px;height:36px}
+  .nav-tools{gap:5px}
 }
 
 /* hero */
-.hero{position:relative;background:var(--grad-navy);color:#fff;overflow:hidden;padding:clamp(70px,10vw,120px) 0 clamp(90px,11vw,140px)}
-.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 80% 10%,rgba(18,180,230,.45),transparent 60%),radial-gradient(50% 50% at 5% 90%,rgba(10,147,212,.35),transparent 55%);pointer-events:none}
+.hero{position:relative;color:#fff;overflow:hidden;padding:clamp(60px,10vw,118px) 0 clamp(92px,11vw,146px);
+  background:
+    radial-gradient(120% 130% at 88% -12%, rgba(22,196,238,.32), transparent 42%),
+    radial-gradient(100% 120% at -12% 112%, rgba(84,116,246,.26), transparent 48%),
+    linear-gradient(158deg,#102a56 0%,#0a1c40 55%,#060f28 100%)}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);background-size:26px 26px;
+  -webkit-mask-image:radial-gradient(125% 95% at 50% 0%,#000 40%,transparent 78%);mask-image:radial-gradient(125% 95% at 50% 0%,#000 40%,transparent 78%)}
 .hero-grid{position:relative;display:grid;grid-template-columns:1.08fr .92fr;gap:56px;align-items:center}
 .hero h1{font-size:clamp(2.2rem,5.2vw,4rem);font-weight:800;color:#fff;margin:20px 0 18px}
 .hero h1 .hl{background:linear-gradient(120deg,#42d4ff,#8be9ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
@@ -117,8 +140,9 @@ header.nav.scrolled{box-shadow:0 10px 30px -18px rgba(16,41,79,.3);border-color:
 .hero-mini .m b{font-family:'Plus Jakarta Sans';font-size:1.7rem;font-weight:800;color:#fff}
 .hero-mini .m span{font-size:.82rem;color:#9fb4d6}
 .hero-visual{position:relative;display:grid;place-items:center;min-height:380px}
+.hero-visual::before{content:"";position:absolute;width:min(90%,430px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(22,196,238,.5),rgba(84,116,246,.18) 45%,transparent 68%);filter:blur(46px);z-index:0}
 .orb{position:absolute;border-radius:50%;filter:blur(2px);opacity:.9}
-.glass-card{position:relative;width:min(100%,410px);background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.2);border-radius:28px;padding:30px;backdrop-filter:blur(14px);box-shadow:0 40px 80px -30px rgba(0,0,0,.6)}
+.glass-card{position:relative;z-index:1;width:min(100%,410px);background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.06));border:1px solid rgba(255,255,255,.22);border-radius:28px;padding:30px;backdrop-filter:blur(16px);box-shadow:0 44px 90px -34px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.18)}
 .glass-card .gc-logo{background:#fff;border-radius:20px;padding:22px;display:grid;place-items:center;margin-bottom:20px}
 .gc-logo svg{height:52px}
 .gc-row{display:flex;align-items:center;gap:13px;padding:12px;border-radius:14px;background:rgba(255,255,255,.07);margin-bottom:10px}
@@ -320,6 +344,37 @@ footer ul a:hover{color:#fff}
 .toast.show{transform:translate(-50%,0)}
 .toast svg{width:18px;height:18px;color:#7ee0ff}
 
+/* mobile polish */
+@media(max-width:600px){
+  .wrap{padding:0 16px}
+  .pad{padding:58px 0}
+  .hero{padding:42px 0 74px}
+  .hero-grid{gap:38px}
+  .hero h1{font-size:2.05rem;margin:16px 0 14px}
+  .hero .lead{font-size:1rem;margin-bottom:24px}
+  .hero .badge{font-size:.8rem}
+  .hero-cta{gap:10px;margin-bottom:28px}
+  .hero-cta .btn{width:100%}
+  .hero-mini{gap:14px;width:100%}
+  .hero-mini .m{flex:1}
+  .hero-mini .m b{font-size:1.35rem}
+  .hero-mini .m span{font-size:.72rem}
+  .sec-head{margin-bottom:30px}
+  .sec-head h2{font-size:1.62rem}
+  .sec-head p{font-size:.98rem}
+  .btn-lg{padding:14px 20px;font-size:.96rem}
+  .glass-card{padding:22px}
+  .gc-logo svg{height:44px}
+  .stat{padding:22px 14px}
+  .course{padding:24px}
+  .why-art{min-height:290px;padding:26px}
+  .cta-band{padding:34px 22px}
+  .cta-band .cta-btns .btn{width:100%}
+  .form-card{padding:22px}
+  .mock-ui{padding:18px}
+  .fab{right:14px;bottom:14px;gap:10px}
+  .fab a,.fab button{width:50px;height:50px}
+}
 /* reveal */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
@@ -334,7 +389,7 @@ footer ul a:hover{color:#fff}
   <div class="wrap">
     <div class="t-left">
       <a href="tel:+998996640606"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg><span>+998 99 664 06 06</span></a>
-      <a href="#" data-i18n="top.addr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Mirzo Ulug'bek, Qorasuv-6</span></a>
+      <a href="#contact" class="t-addr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="top.addr">Mirzo Ulug'bek, Qorasuv-6</span></a>
     </div>
     <div class="t-right">
       <a href="https://t.me/ctnlc" target="_blank" rel="noopener">Telegram</a>
@@ -458,42 +513,42 @@ footer ul a:hover{color:#fff}
         <h3 data-i18n="c1.t">General English</h3>
         <p data-i18n="c1.d">Grammatika, lug'at, o'qish, tinglash va gapirish — to'liq umumiy ingliz tili A1 dan C1 gacha.</p>
         <div class="c-meta"><span class="tag">A1–C1</span><span class="tag" data-i18n="c.tag.age1">14+ yosh</span></div>
-        <a href="#contact" class="c-link" data-i18n="c.more">Batafsil <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#contact" class="c-link"><span data-i18n="c.more">Batafsil</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
       <div class="course reveal d1">
         <div class="c-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg></div>
         <h3 data-i18n="c2.t">IELTS Intensive</h3>
         <p data-i18n="c2.d">4 ta ko'nikma bo'yicha maqsadli tayyorgarlik, real mock imtihonlar va band score strategiyalari.</p>
         <div class="c-meta"><span class="tag">6.0–8.0</span><span class="tag" data-i18n="c.tag.exam">Imtihon</span></div>
-        <a href="#contact" class="c-link" data-i18n="c.more">Batafsil <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#contact" class="c-link"><span data-i18n="c.more">Batafsil</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
       <div class="course reveal d2">
         <div class="c-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M5.5 21a7 7 0 0 1 13 0"/></svg></div>
         <h3 data-i18n="c3.t">Kids English</h3>
         <p data-i18n="c3.d">6–12 yoshdagi bolalar uchun o'yin va faoliyat orqali qiziqarli va samarali darslar.</p>
         <div class="c-meta"><span class="tag">6–12</span><span class="tag" data-i18n="c.tag.kids">Bolalar</span></div>
-        <a href="#contact" class="c-link" data-i18n="c.more">Batafsil <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#contact" class="c-link"><span data-i18n="c.more">Batafsil</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
       <div class="course reveal">
         <div class="c-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l19-9-9 19-2-8z"/></svg></div>
         <h3 data-i18n="c4.t">Speaking Club</h3>
         <p data-i18n="c4.d">Jonli muloqot, munozaralar va real vaziyatlar orqali gapirishga bo'lgan qo'rquvni yo'qoting.</p>
         <div class="c-meta"><span class="tag" data-i18n="c.tag.weekly">Har hafta</span><span class="tag" data-i18n="c.tag.practice">Amaliyot</span></div>
-        <a href="#contact" class="c-link" data-i18n="c.more">Batafsil <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#contact" class="c-link"><span data-i18n="c.more">Batafsil</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
       <div class="course reveal d1">
         <div class="c-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4z"/><path d="M6 1v3M10 1v3M14 1v3"/></svg></div>
         <h3 data-i18n="c5.t">Teenagers</h3>
         <p data-i18n="c5.d">O'smirlar uchun maktab dasturini kuchaytiruvchi va zamonaviy ingliz tili yo'nalishi.</p>
         <div class="c-meta"><span class="tag">12–16</span><span class="tag" data-i18n="c.tag.school">Maktab+</span></div>
-        <a href="#contact" class="c-link" data-i18n="c.more">Batafsil <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#contact" class="c-link"><span data-i18n="c.more">Batafsil</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
       <div class="course reveal d2">
         <div class="c-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
         <h3 data-i18n="c6.t">Business English</h3>
         <p data-i18n="c6.d">Ish, biznes yozishmalari va prezentatsiyalar uchun amaliy professional ingliz tili.</p>
         <div class="c-meta"><span class="tag" data-i18n="c.tag.pro">Professional</span><span class="tag" data-i18n="c.tag.adult">Kattalar</span></div>
-        <a href="#contact" class="c-link" data-i18n="c.more">Batafsil <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#contact" class="c-link"><span data-i18n="c.more">Batafsil</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
     </div>
   </div>
