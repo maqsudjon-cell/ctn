@@ -78,7 +78,7 @@ section{position:relative}
 @media(max-width:430px){.topbar{font-size:.8rem}.topbar .t-right a:last-child{display:none}}
 
 /* header/nav */
-header.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid transparent;transition:box-shadow .3s,border-color .3s,background .3s}
+header.nav{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line);transition:box-shadow .3s}
 header.nav.scrolled{box-shadow:0 10px 30px -18px rgba(16,41,79,.3);border-color:var(--line)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:72px;gap:18px}
 .brand{display:flex;align-items:center;gap:10px;color:var(--ink)}
@@ -122,9 +122,8 @@ header.nav.scrolled{box-shadow:0 10px 30px -18px rgba(16,41,79,.3);border-color:
 /* hero */
 .hero{position:relative;color:#fff;overflow:hidden;padding:clamp(60px,10vw,118px) 0 clamp(92px,11vw,146px);
   background:
-    radial-gradient(120% 130% at 88% -12%, rgba(22,196,238,.32), transparent 42%),
-    radial-gradient(100% 120% at -12% 112%, rgba(84,116,246,.26), transparent 48%),
-    linear-gradient(158deg,#102a56 0%,#0a1c40 55%,#060f28 100%)}
+    radial-gradient(78% 70% at 93% 4%, rgba(19,181,232,.36), transparent 46%),
+    linear-gradient(160deg,#173a6d 0%,#0e2450 48%,#0a1a3e 100%)}
 .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
   background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);background-size:26px 26px;
   -webkit-mask-image:radial-gradient(125% 95% at 50% 0%,#000 40%,transparent 78%);mask-image:radial-gradient(125% 95% at 50% 0%,#000 40%,transparent 78%)}
@@ -132,25 +131,28 @@ header.nav.scrolled{box-shadow:0 10px 30px -18px rgba(16,41,79,.3);border-color:
 .hero h1{font-size:clamp(2.2rem,5.2vw,4rem);font-weight:800;color:#fff;margin:20px 0 18px}
 .hero h1 .hl{background:linear-gradient(120deg,#42d4ff,#8be9ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .hero .lead{font-size:clamp(1.02rem,2vw,1.22rem);color:#c9d7ee;max-width:560px;margin-bottom:30px}
-.hero .badge{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);padding:8px 15px;border-radius:40px;font-size:.85rem;font-weight:600;color:#dcecff;backdrop-filter:blur(6px)}
-.hero .badge b{color:#7ee0ff}
+.hero .badge{display:inline-flex;align-items:center;gap:9px;background:var(--cyan);border:0;padding:9px 16px;border-radius:40px;font-size:.85rem;font-weight:800;color:#042638;box-shadow:0 8px 22px -8px rgba(19,181,232,.7)}
+.hero .badge b{color:#042638}
 .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px}
 .hero-mini{display:flex;gap:28px;flex-wrap:wrap}
 .hero-mini .m{display:flex;flex-direction:column}
 .hero-mini .m b{font-family:'Plus Jakarta Sans';font-size:1.7rem;font-weight:800;color:#fff}
 .hero-mini .m span{font-size:.82rem;color:#9fb4d6}
+.hero-rr{display:flex;flex-wrap:wrap;gap:9px 22px;margin-bottom:30px}
+.hero-rr>span{display:inline-flex;align-items:center;gap:7px;color:#d3e2f7;font-size:.9rem;font-weight:600}
+.hero-rr>span>svg{width:17px;height:17px;color:#4ade80;flex:0 0 auto}
 .hero-visual{position:relative;display:grid;place-items:center;min-height:380px}
 .hero-visual::before{content:"";position:absolute;width:min(90%,430px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(22,196,238,.5),rgba(84,116,246,.18) 45%,transparent 68%);filter:blur(46px);z-index:0}
 .orb{position:absolute;border-radius:50%;filter:blur(2px);opacity:.9}
-.glass-card{position:relative;z-index:1;width:min(100%,410px);background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.06));border:1px solid rgba(255,255,255,.22);border-radius:28px;padding:30px;backdrop-filter:blur(16px);box-shadow:0 44px 90px -34px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.18)}
-.glass-card .gc-logo{background:#fff;border-radius:20px;padding:22px;display:grid;place-items:center;margin-bottom:20px}
-.gc-logo svg{height:52px}
-.gc-row{display:flex;align-items:center;gap:13px;padding:12px;border-radius:14px;background:rgba(255,255,255,.07);margin-bottom:10px}
+.glass-card{position:relative;z-index:1;width:min(100%,410px);background:#fff;border:1px solid #e8edf5;border-radius:26px;padding:24px;box-shadow:0 44px 90px -34px rgba(4,14,35,.7)}
+.glass-card .gc-logo{background:#f2f7fc;border:1px solid #e8edf5;border-radius:18px;padding:20px;display:grid;place-items:center;margin-bottom:16px}
+.gc-logo svg{height:50px}
+.gc-row{display:flex;align-items:center;gap:13px;padding:13px;border-radius:14px;background:#f2f7fc;margin-bottom:9px}
 .gc-row .ic{width:40px;height:40px;border-radius:11px;background:var(--grad);display:grid;place-items:center;flex:0 0 auto}
 .gc-row .ic svg{width:19px;height:19px;color:#fff}
-.gc-row b{color:#fff;font-size:.96rem;font-family:'Plus Jakarta Sans'}
-.gc-row span{color:#a9bdde;font-size:.8rem;display:block}
-.float-badge{position:absolute;background:var(--card);color:var(--ink);border-radius:16px;padding:12px 16px;box-shadow:var(--shadow);display:flex;align-items:center;gap:11px;font-weight:700;font-size:.9rem;animation:floaty 5s ease-in-out infinite}
+.gc-row b{color:var(--navy);font-size:.96rem;font-family:'Plus Jakarta Sans'}
+.gc-row span{color:var(--muted);font-size:.8rem;display:block}
+.float-badge{position:absolute;z-index:2;background:var(--card);color:var(--ink);border-radius:16px;padding:12px 16px;box-shadow:var(--shadow);display:flex;align-items:center;gap:11px;font-weight:700;font-size:.9rem;animation:floaty 5s ease-in-out infinite}
 .float-badge .fb-ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:#fff}
 .fb-1{top:-14px;left:-26px;animation-delay:.2s}
 .fb-2{bottom:-18px;right:-20px;animation-delay:1.4s}
@@ -196,9 +198,9 @@ header.nav.scrolled{box-shadow:0 10px 30px -18px rgba(16,41,79,.3);border-color:
 .why-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:56px;align-items:center}
 .why-art{position:relative;border-radius:26px;overflow:hidden;background:var(--grad-navy);min-height:440px;padding:34px;color:#fff;display:flex;flex-direction:column;justify-content:flex-end}
 .why-art::before{content:"";position:absolute;inset:0;background:radial-gradient(50% 50% at 75% 20%,rgba(18,180,230,.5),transparent 60%)}
-.why-art .wa-badge{position:relative;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:18px;padding:20px;backdrop-filter:blur(10px);margin-bottom:14px}
-.why-art .wa-badge b{font-family:'Plus Jakarta Sans';font-size:2.2rem;display:block;color:#7ee0ff}
-.why-art .wa-badge span{color:#cfe0f8;font-size:.9rem}
+.why-art .wa-badge{position:relative;background:#fff;border:1px solid #e8edf5;border-radius:16px;padding:20px 22px;margin-bottom:16px;box-shadow:0 20px 40px -24px rgba(4,14,35,.5)}
+.why-art .wa-badge b{font-family:'Plus Jakarta Sans';font-size:2.2rem;display:block;color:var(--cyan-dd)}
+.why-art .wa-badge span{color:var(--muted);font-size:.9rem}
 .why-art .wa-quote{position:relative;font-size:1.05rem;line-height:1.5;color:#eaf3ff}
 .feat-list{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .feat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);padding:22px;box-shadow:var(--shadow-sm)}
@@ -231,19 +233,19 @@ header.nav.scrolled{box-shadow:0 10px 30px -18px rgba(16,41,79,.3);border-color:
 .mock .m-feats div{display:flex;align-items:center;gap:12px;color:#e5eefb;font-weight:500}
 .mock .m-feats .ck{width:26px;height:26px;border-radius:8px;background:rgba(126,224,255,.2);display:grid;place-items:center;flex:0 0 auto}
 .mock .m-feats .ck svg{width:15px;height:15px;color:#7ee0ff}
-.mock-ui{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:24px;padding:22px;backdrop-filter:blur(12px);box-shadow:0 40px 80px -30px rgba(0,0,0,.6)}
+.mock-ui{background:#fff;border:1px solid #e8edf5;border-radius:22px;padding:20px;box-shadow:0 44px 90px -34px rgba(4,14,35,.6)}
 .mock-ui .mu-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .mock-ui .mu-dot{display:flex;gap:6px}
-.mock-ui .mu-dot i{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.25)}
-.mock-ui .mu-timer{font-family:'Plus Jakarta Sans';font-weight:700;color:#7ee0ff;background:rgba(126,224,255,.12);padding:5px 12px;border-radius:30px;font-size:.85rem}
-.mock-ui .mu-q{background:rgba(255,255,255,.06);border-radius:14px;padding:16px;margin-bottom:10px}
-.mock-ui .mu-q b{color:#fff;font-size:.9rem;display:block;margin-bottom:11px}
-.mock-ui .mu-opt{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;margin-bottom:8px;color:#d4e2f7;font-size:.85rem}
-.mock-ui .mu-opt.sel{border-color:#7ee0ff;background:rgba(126,224,255,.12);color:#fff}
-.mock-ui .mu-opt i{width:16px;height:16px;border-radius:50%;border:2px solid #6d84a8}
-.mock-ui .mu-opt.sel i{border-color:#7ee0ff;background:#7ee0ff}
-.mock-ui .mu-bar{height:7px;background:rgba(255,255,255,.12);border-radius:10px;overflow:hidden;margin-top:14px}
-.mock-ui .mu-bar span{display:block;height:100%;width:45%;background:linear-gradient(90deg,#42d4ff,#7ee0ff);border-radius:10px}
+.mock-ui .mu-dot i{width:11px;height:11px;border-radius:50%;background:#d6deea}
+.mock-ui .mu-timer{font-family:'Plus Jakarta Sans';font-weight:800;color:var(--cyan-dd);background:#e9f6fc;padding:5px 12px;border-radius:30px;font-size:.85rem}
+.mock-ui .mu-q{background:#f4f8fd;border-radius:14px;padding:16px;margin-bottom:10px}
+.mock-ui .mu-q b{color:var(--navy);font-size:.9rem;display:block;margin-bottom:11px}
+.mock-ui .mu-opt{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #e4eaf3;border-radius:10px;padding:11px 12px;margin-bottom:8px;color:#4a5a75;font-size:.85rem;font-weight:500}
+.mock-ui .mu-opt.sel{border-color:var(--cyan);background:#e9f7fc;color:var(--navy);font-weight:700}
+.mock-ui .mu-opt i{width:16px;height:16px;border-radius:50%;border:2px solid #c4d0e0;flex:0 0 auto}
+.mock-ui .mu-opt.sel i{border-color:var(--cyan);background:var(--cyan)}
+.mock-ui .mu-bar{height:7px;background:#e8edf5;border-radius:10px;overflow:hidden;margin-top:14px}
+.mock-ui .mu-bar span{display:block;height:100%;width:45%;background:linear-gradient(90deg,var(--cyan),var(--cyan-d));border-radius:10px}
 .soon{display:inline-flex;align-items:center;gap:8px;background:rgba(126,224,255,.16);border:1px solid rgba(126,224,255,.3);color:#7ee0ff;padding:7px 15px;border-radius:40px;font-weight:700;font-size:.8rem;letter-spacing:.06em}
 @media(max-width:880px){.mock-grid{grid-template-columns:1fr;gap:38px}}
 
@@ -340,6 +342,18 @@ footer ul a:hover{color:#fff}
 .fab .top{background:var(--card);color:var(--ink);border:1px solid var(--line);opacity:0;pointer-events:none}
 .fab .top.show{opacity:1;pointer-events:auto}
 .fab .top svg{width:22px;height:22px}
+/* sticky mobile CTA bar */
+.mcta{display:none}
+.mcta-btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:800;font-size:.95rem;padding:13px 10px;border-radius:14px}
+.mcta-btn svg{width:18px;height:18px}
+.mcta-call{background:var(--bg-soft2);color:var(--navy)}
+.mcta-book{background:var(--grad);color:#fff;box-shadow:0 10px 22px -10px rgba(10,143,212,.7)}
+@media(max-width:600px){
+  .mcta{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;gap:9px;padding:9px 12px calc(9px + env(safe-area-inset-bottom,0px));background:var(--card);border-top:1px solid var(--line);box-shadow:0 -10px 26px -16px rgba(4,14,35,.35)}
+  .fab .tg{display:none}
+  .fab{bottom:82px;right:12px}
+  body{padding-bottom:74px}
+}
 .toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,140%);background:var(--navy);color:#fff;padding:14px 22px;border-radius:40px;box-shadow:var(--shadow);z-index:80;font-weight:600;font-size:.92rem;display:flex;align-items:center;gap:10px;transition:transform .4s}
 .toast.show{transform:translate(-50%,0)}
 .toast svg{width:18px;height:18px;color:#7ee0ff}
@@ -442,12 +456,17 @@ footer ul a:hover{color:#fff}
 <section class="hero" id="home">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <span class="badge" data-i18n="hero.badge">🎓 Toshkentdagi zamonaviy til markazi</span>
+      <span class="badge" data-i18n="hero.badge">🔥 Yangi guruhlarga yozilish ochiq</span>
       <h1><span data-i18n="hero.t1">Ingliz tilini</span> <span class="hl" data-i18n="hero.t2">CTN</span> <span data-i18n="hero.t3">bilan puxta o'rganing</span></h1>
       <p class="lead" data-i18n="hero.lead">Tajribali ustozlar, kichik guruhlar va zamonaviy metodika bilan noldan ravon gapirishgacha. IELTS, Kids va Speaking yo'nalishlari.</p>
       <div class="hero-cta">
         <a href="#contact" class="btn btn-primary btn-lg" data-i18n="hero.cta1">Bepul sinov darsga yozilish</a>
-        <a href="#courses" class="btn btn-ghost btn-lg" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.25)" data-i18n="hero.cta2">Kurslarni ko'rish</a>
+        <a href="#courses" class="btn btn-white btn-lg" data-i18n="hero.cta2">Kurslarni ko'rish</a>
+      </div>
+      <div class="hero-rr">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.rr1">Birinchi dars bepul</span></span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.rr2">Hech qanday majburiyat yo'q</span></span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.rr3">5 daqiqada javob</span></span>
       </div>
       <div class="hero-mini">
         <div class="m"><b data-count="500">500+</b><span data-i18n="hero.m1">Bitiruvchi o'quvchi</span></div>
@@ -760,6 +779,12 @@ footer ul a:hover{color:#fff}
   </div>
 </footer>
 
+<!-- STICKY MOBILE CTA -->
+<div class="mcta">
+  <a href="tel:+998996640606" class="mcta-btn mcta-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg><span data-i18n="mcta.call">Qo'ng'iroq</span></a>
+  <a href="#contact" class="mcta-btn mcta-book"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="mcta.book">Bepul sinov dars</span></a>
+</div>
+
 <!-- FLOATING -->
 <div class="fab">
   <a class="tg" href="https://t.me/ctnlc" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 3 2 10.5l6 2.2L17 6 10 13l-.3 5 3.3-3 4.6 3.4z"/></svg></a>
@@ -774,9 +799,10 @@ const I18N={
  uz:{
   "top.addr":"Mirzo Ulug'bek, Qorasuv-6",
   "nav.courses":"Kurslar","nav.why":"Nega biz","nav.results":"Natijalar","nav.mock":"Mock testlar","nav.teachers":"Ustozlar","nav.contact":"Aloqa","nav.cta":"Bepul sinov dars",
-  "hero.badge":"🎓 Toshkentdagi zamonaviy til markazi","hero.t1":"Ingliz tilini","hero.t2":"CTN","hero.t3":"bilan puxta o'rganing",
+  "hero.badge":"🔥 Yangi guruhlarga yozilish ochiq","hero.t1":"Ingliz tilini","hero.t2":"CTN","hero.t3":"bilan puxta o'rganing",
   "hero.lead":"Tajribali ustozlar, kichik guruhlar va zamonaviy metodika bilan noldan ravon gapirishgacha. IELTS, Kids va Speaking yo'nalishlari.",
   "hero.cta1":"Bepul sinov darsga yozilish","hero.cta2":"Kurslarni ko'rish","hero.m1":"Bitiruvchi o'quvchi","hero.m2":"Tajribali ustoz","hero.m3":"O'rtacha IELTS ball",
+  "hero.rr1":"Birinchi dars bepul","hero.rr2":"Hech qanday majburiyat yo'q","hero.rr3":"5 daqiqada javob","mcta.call":"Qo'ng'iroq","mcta.book":"Bepul sinov dars",
   "hero.fb1a":"Bepul","hero.fb1b":"Sinov dars","hero.fb2":"O'quvchilar bahosi",
   "gc.r1a":"General English","gc.r1b":"A1 dan C1 darajagacha","gc.r2a":"IELTS Intensive","gc.r2b":"Maqsadli natija uchun","gc.r3a":"Speaking Club","gc.r3b":"Har hafta jonli amaliyot",
   "strip.1":"Sertifikatli ustozlar","strip.2":"Kichik guruhlar (8-12)","strip.3":"Zamonaviy metodika","strip.4":"Natija monitoringi",
@@ -819,9 +845,10 @@ const I18N={
  ru:{
   "top.addr":"Мирзо Улугбек, Карасу-6",
   "nav.courses":"Курсы","nav.why":"Почему мы","nav.results":"Результаты","nav.mock":"Mock тесты","nav.teachers":"Преподаватели","nav.contact":"Контакты","nav.cta":"Бесплатный урок",
-  "hero.badge":"🎓 Современный языковой центр в Ташкенте","hero.t1":"Изучайте английский","hero.t2":"с CTN","hero.t3":"основательно",
+  "hero.badge":"🔥 Идёт набор в новые группы","hero.t1":"Изучайте английский","hero.t2":"с CTN","hero.t3":"основательно",
   "hero.lead":"Опытные преподаватели, малые группы и современная методика — от нуля до свободной речи. IELTS, Kids и Speaking.",
   "hero.cta1":"Записаться на бесплатный урок","hero.cta2":"Смотреть курсы","hero.m1":"Выпускников","hero.m2":"Преподавателей","hero.m3":"Средний балл IELTS",
+  "hero.rr1":"Первый урок бесплатно","hero.rr2":"Без обязательств","hero.rr3":"Ответим за 5 минут","mcta.call":"Позвонить","mcta.book":"Бесплатный урок",
   "hero.fb1a":"Бесплатно","hero.fb1b":"Пробный урок","hero.fb2":"Оценка учеников",
   "gc.r1a":"General English","gc.r1b":"От A1 до C1","gc.r2a":"IELTS Intensive","gc.r2b":"Для целевого результата","gc.r3a":"Speaking Club","gc.r3b":"Живая практика каждую неделю",
   "strip.1":"Сертифицированные педагоги","strip.2":"Малые группы (8-12)","strip.3":"Современная методика","strip.4":"Мониторинг результатов",
@@ -864,9 +891,10 @@ const I18N={
  en:{
   "top.addr":"Mirzo Ulugbek, Karasu-6",
   "nav.courses":"Courses","nav.why":"Why us","nav.results":"Results","nav.mock":"Mock tests","nav.teachers":"Teachers","nav.contact":"Contact","nav.cta":"Free trial lesson",
-  "hero.badge":"🎓 A modern language centre in Tashkent","hero.t1":"Master English","hero.t2":"with CTN","hero.t3":"the right way",
+  "hero.badge":"🔥 Enrollment open for new groups","hero.t1":"Master English","hero.t2":"with CTN","hero.t3":"the right way",
   "hero.lead":"Experienced teachers, small groups and a modern methodology — from zero to fluent. IELTS, Kids and Speaking tracks.",
   "hero.cta1":"Book a free trial lesson","hero.cta2":"Explore courses","hero.m1":"Graduates","hero.m2":"Expert teachers","hero.m3":"Average IELTS score",
+  "hero.rr1":"First lesson free","hero.rr2":"No commitment","hero.rr3":"We reply in 5 min","mcta.call":"Call","mcta.book":"Free trial lesson",
   "hero.fb1a":"Free","hero.fb1b":"Trial lesson","hero.fb2":"Student rating",
   "gc.r1a":"General English","gc.r1b":"From A1 to C1","gc.r2a":"IELTS Intensive","gc.r2b":"For your target score","gc.r3a":"Speaking Club","gc.r3b":"Live practice every week",
   "strip.1":"Certified teachers","strip.2":"Small groups (8-12)","strip.3":"Modern methodology","strip.4":"Progress monitoring",
