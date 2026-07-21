@@ -274,6 +274,20 @@ header.nav.scrolled{box-shadow:0 10px 30px -18px rgba(16,41,79,.3);border-color:
 .tst-who b{display:block;font-size:.98rem}
 .tst-who span{color:var(--muted);font-size:.83rem}
 
+/* free resources */
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.tool{position:relative;display:block;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:34px 32px;box-shadow:var(--shadow-sm);transition:transform .3s,box-shadow .3s,border-color .3s;overflow:hidden}
+.tool::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 100% 0,rgba(77,107,254,.09),transparent 55%);pointer-events:none}
+.tool:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--cyan) 45%,transparent)}
+.tool-ic{position:relative;width:60px;height:60px;border-radius:16px;background:var(--grad);display:grid;place-items:center;margin-bottom:20px;box-shadow:var(--shadow-glow)}
+.tool-ic svg{width:28px;height:28px;color:#fff}
+.tool h3{position:relative;font-size:1.4rem;font-weight:800;margin-bottom:10px}
+.tool p{position:relative;color:var(--muted);margin-bottom:18px}
+.tool-badge{position:absolute;top:22px;right:22px;background:var(--bg-soft2);color:var(--cyan-dd);font-size:.72rem;font-weight:800;letter-spacing:.07em;padding:5px 12px;border-radius:30px}
+.tool-link{position:relative;display:inline-flex;align-items:center;gap:8px;font-weight:800;color:var(--cyan-d)}
+.tool-link svg{width:17px;height:17px;transition:transform .2s}
+.tool:hover .tool-link svg{transform:translate(3px,-3px)}
+@media(max-width:760px){.tools-grid{grid-template-columns:1fr}}
 /* faq */
 .faq-wrap{max-width:820px;margin:0 auto}
 .faq-item{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:12px;overflow:hidden;transition:box-shadow .3s,border-color .3s}
@@ -428,6 +442,7 @@ footer ul a:hover{color:#fff}
       <a href="#courses" data-i18n="nav.courses">Kurslar</a>
       <a href="#why" data-i18n="nav.why">Nega biz</a>
       <a href="#results" data-i18n="nav.results">Natijalar</a>
+      <a href="#resources" data-i18n="nav.resources">Resurslar</a>
       <a href="#mock" data-i18n="nav.mock">Mock testlar</a>
       <a href="#contact" data-i18n="nav.contact">Aloqa</a>
       <a href="#contact" class="btn btn-primary nav-cta-mob" data-i18n="nav.cta">Bepul sinov dars</a>
@@ -593,6 +608,33 @@ footer ul a:hover{color:#fff}
   </div>
 </section>
 
+<!-- FREE RESOURCES -->
+<section class="pad" id="resources">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="res2.eyebrow">Bepul resurslar</span>
+      <h2 data-i18n="res2.title">O'zingiz mashq qilish uchun bepul vositalar</h2>
+      <p data-i18n="res2.sub">CTN o'quvchilari va hamma uchun ochiq — istalgan vaqtda foydalaning.</p>
+    </div>
+    <div class="tools-grid">
+      <a class="tool reveal" href="https://flarestamina.com" target="_blank" rel="noopener">
+        <span class="tool-badge" data-i18n="tool.badge">BEPUL</span>
+        <div class="tool-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg></div>
+        <h3 data-i18n="tool1.t">IELTS Bepul Testlar</h3>
+        <p data-i18n="tool1.d">Real imtihon formatidagi 100+ bepul IELTS testlari — Listening, Reading, Writing va Speaking.</p>
+        <span class="tool-link"><span data-i18n="tool.open">Ochish</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </a>
+      <a class="tool reveal d1" href="https://flarestamina.com/ctn-vocab/" target="_blank" rel="noopener">
+        <span class="tool-badge" data-i18n="tool.badge">BEPUL</span>
+        <div class="tool-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M9 7h6M9 11h4"/></svg></div>
+        <h3 data-i18n="tool2.t">CTN Vocab Trainer</h3>
+        <p data-i18n="tool2.d">Ingliz tili so'z boyligini interaktiv mashqlar bilan tez va oson oshiring.</p>
+        <span class="tool-link"><span data-i18n="tool.open">Ochish</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- MOCK TEASER -->
 <section class="mock pad" id="mock">
   <div class="wrap mock-grid">
@@ -713,7 +755,7 @@ footer ul a:hover{color:#fff}
           <a href="tel:+998996640606" aria-label="Call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></a>
         </div>
       </div>
-      <div><h5 data-i18n="foot.nav">Bo'limlar</h5><ul><li><a href="#courses" data-i18n="nav.courses">Kurslar</a></li><li><a href="#why" data-i18n="nav.why">Nega biz</a></li><li><a href="#results" data-i18n="nav.results">Natijalar</a></li><li><a href="#mock" data-i18n="nav.mock">Mock testlar</a></li></ul></div>
+      <div><h5 data-i18n="foot.nav">Bo'limlar</h5><ul><li><a href="#courses" data-i18n="nav.courses">Kurslar</a></li><li><a href="#why" data-i18n="nav.why">Nega biz</a></li><li><a href="#results" data-i18n="nav.results">Natijalar</a></li><li><a href="#mock" data-i18n="nav.mock">Mock testlar</a></li><li><a href="#resources" data-i18n="nav.resources">Resurslar</a></li></ul></div>
       <div><h5 data-i18n="foot.courses">Kurslar</h5><ul><li><a href="#courses">General English</a></li><li><a href="#courses">IELTS Intensive</a></li><li><a href="#courses">Kids English</a></li><li><a href="#courses">Speaking Club</a></li></ul></div>
       <div><h5 data-i18n="foot.contact">Aloqa</h5><ul class="f-contact">
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>+998 99 664 06 06</li>
@@ -723,7 +765,6 @@ footer ul a:hover{color:#fff}
     </div>
     <div class="foot-bottom">
       <span>© <span id="year"></span> CTN Language Centre. <span data-i18n="foot.rights">Barcha huquqlar himoyalangan.</span></span>
-      <span data-i18n="foot.made">Toshkentda ❤ bilan yaratilgan</span>
     </div>
   </div>
 </footer>
@@ -747,7 +788,8 @@ footer ul a:hover{color:#fff}
 const I18N={
  uz:{
   "top.addr":"Mirzo Ulug'bek, Qorasuv-6",
-  "nav.courses":"Kurslar","nav.why":"Nega biz","nav.results":"Natijalar","nav.mock":"Mock testlar","nav.teachers":"Ustozlar","nav.contact":"Aloqa","nav.cta":"Bepul sinov dars",
+  "nav.courses":"Kurslar","nav.why":"Nega biz","nav.results":"Natijalar","nav.mock":"Mock testlar","nav.teachers":"Ustozlar","nav.contact":"Aloqa","nav.cta":"Bepul sinov dars","nav.resources":"Resurslar",
+  "res2.eyebrow":"Bepul resurslar","res2.title":"O'zingiz mashq qilish uchun bepul vositalar","res2.sub":"CTN o'quvchilari va hamma uchun ochiq — istalgan vaqtda foydalaning.","tool1.t":"IELTS Bepul Testlar","tool1.d":"Real imtihon formatidagi 100+ bepul IELTS testlari — Listening, Reading, Writing va Speaking.","tool2.t":"CTN Vocab Trainer","tool2.d":"Ingliz tili so'z boyligini interaktiv mashqlar bilan tez va oson oshiring.","tool.badge":"BEPUL","tool.open":"Ochish",
   "hero.badge":"🔥 Yangi guruhlarga yozilish ochiq","hero.t1":"Ingliz tilini","hero.t2":"CTN","hero.t3":"bilan puxta o'rganing",
   "hero.lead":"Tajribali ustozlar, kichik guruhlar va zamonaviy metodika bilan noldan ravon gapirishgacha. IELTS, Kids va Speaking yo'nalishlari.",
   "hero.cta1":"Bepul sinov darsga yozilish","hero.cta2":"Kurslarni ko'rish","hero.m1":"maqsadli tayyorgarlik","hero.m2":"6–12 yosh uchun","hero.m3":"jonli amaliyot",
@@ -793,7 +835,8 @@ const I18N={
  },
  ru:{
   "top.addr":"Мирзо Улугбек, Карасу-6",
-  "nav.courses":"Курсы","nav.why":"Почему мы","nav.results":"Результаты","nav.mock":"Mock тесты","nav.teachers":"Преподаватели","nav.contact":"Контакты","nav.cta":"Бесплатный урок",
+  "nav.courses":"Курсы","nav.why":"Почему мы","nav.results":"Результаты","nav.mock":"Mock тесты","nav.teachers":"Преподаватели","nav.contact":"Контакты","nav.cta":"Бесплатный урок","nav.resources":"Ресурсы",
+  "res2.eyebrow":"Бесплатные ресурсы","res2.title":"Бесплатные инструменты для самостоятельной практики","res2.sub":"Открыто для учеников CTN и всех желающих — пользуйтесь в любое время.","tool1.t":"IELTS Бесплатные тесты","tool1.d":"100+ бесплатных тестов IELTS в формате реального экзамена — Listening, Reading, Writing и Speaking.","tool2.t":"CTN Vocab Trainer","tool2.d":"Увеличивайте словарный запас английского с интерактивными упражнениями — быстро и легко.","tool.badge":"БЕСПЛАТНО","tool.open":"Открыть",
   "hero.badge":"🔥 Идёт набор в новые группы","hero.t1":"Изучайте английский","hero.t2":"с CTN","hero.t3":"основательно",
   "hero.lead":"Опытные преподаватели, малые группы и современная методика — от нуля до свободной речи. IELTS, Kids и Speaking.",
   "hero.cta1":"Записаться на бесплатный урок","hero.cta2":"Смотреть курсы","hero.m1":"целевая подготовка","hero.m2":"для 6–12 лет","hero.m3":"живая практика",
@@ -839,7 +882,8 @@ const I18N={
  },
  en:{
   "top.addr":"Mirzo Ulugbek, Karasu-6",
-  "nav.courses":"Courses","nav.why":"Why us","nav.results":"Results","nav.mock":"Mock tests","nav.teachers":"Teachers","nav.contact":"Contact","nav.cta":"Free trial lesson",
+  "nav.courses":"Courses","nav.why":"Why us","nav.results":"Results","nav.mock":"Mock tests","nav.teachers":"Teachers","nav.contact":"Contact","nav.cta":"Free trial lesson","nav.resources":"Resources",
+  "res2.eyebrow":"Free resources","res2.title":"Free tools to practise on your own","res2.sub":"Open to CTN students and everyone — use them anytime.","tool1.t":"IELTS Free Practice Tests","tool1.d":"100+ free IELTS tests in real exam format — Listening, Reading, Writing and Speaking.","tool2.t":"CTN Vocab Trainer","tool2.d":"Grow your English vocabulary fast with interactive drills.","tool.badge":"FREE","tool.open":"Open",
   "hero.badge":"🔥 Enrollment open for new groups","hero.t1":"Master English","hero.t2":"with CTN","hero.t3":"the right way",
   "hero.lead":"Experienced teachers, small groups and a modern methodology — from zero to fluent. IELTS, Kids and Speaking tracks.",
   "hero.cta1":"Book a free trial lesson","hero.cta2":"Explore courses","hero.m1":"targeted prep","hero.m2":"for ages 6–12","hero.m3":"live practice",
