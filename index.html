@@ -119,48 +119,45 @@ header.nav.scrolled{box-shadow:0 10px 30px -18px rgba(16,41,79,.3);border-color:
   .nav-tools{gap:5px}
 }
 
-/* hero */
-.hero{position:relative;color:#fff;overflow:hidden;padding:clamp(60px,10vw,118px) 0 clamp(92px,11vw,146px);
-  background:
-    radial-gradient(78% 70% at 93% 4%, rgba(19,181,232,.36), transparent 46%),
-    linear-gradient(160deg,#173a6d 0%,#0e2450 48%,#0a1a3e 100%)}
-.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);background-size:26px 26px;
-  -webkit-mask-image:radial-gradient(125% 95% at 50% 0%,#000 40%,transparent 78%);mask-image:radial-gradient(125% 95% at 50% 0%,#000 40%,transparent 78%)}
-.hero-grid{position:relative;display:grid;grid-template-columns:1.08fr .92fr;gap:56px;align-items:center}
-.hero h1{font-size:clamp(2.2rem,5.2vw,4rem);font-weight:800;color:#fff;margin:20px 0 18px}
-.hero h1 .hl{background:linear-gradient(120deg,#42d4ff,#8be9ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.hero .lead{font-size:clamp(1.02rem,2vw,1.22rem);color:#c9d7ee;max-width:560px;margin-bottom:30px}
-.hero .badge{display:inline-flex;align-items:center;gap:9px;background:var(--cyan);border:0;padding:9px 16px;border-radius:40px;font-size:.85rem;font-weight:800;color:#042638;box-shadow:0 8px 22px -8px rgba(19,181,232,.7)}
-.hero .badge b{color:#042638}
-.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px}
-.hero-mini{display:flex;gap:28px;flex-wrap:wrap}
-.hero-mini .m{display:flex;flex-direction:column}
-.hero-mini .m b{font-family:'Plus Jakarta Sans';font-size:1.7rem;font-weight:800;color:#fff}
-.hero-mini .m span{font-size:.82rem;color:#9fb4d6}
-.hero-rr{display:flex;flex-wrap:wrap;gap:9px 22px;margin-bottom:30px}
-.hero-rr>span{display:inline-flex;align-items:center;gap:7px;color:#d3e2f7;font-size:.9rem;font-weight:600}
-.hero-rr>span>svg{width:17px;height:17px;color:#4ade80;flex:0 0 auto}
-.hero-visual{position:relative;display:grid;place-items:center;min-height:380px}
-.hero-visual::before{content:"";position:absolute;width:min(90%,430px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(22,196,238,.5),rgba(84,116,246,.18) 45%,transparent 68%);filter:blur(46px);z-index:0}
-.orb{position:absolute;border-radius:50%;filter:blur(2px);opacity:.9}
-.glass-card{position:relative;z-index:1;width:min(100%,410px);background:#fff;border:1px solid #e8edf5;border-radius:26px;padding:24px;box-shadow:0 44px 90px -34px rgba(4,14,35,.7)}
-.glass-card .gc-logo{background:#f2f7fc;border:1px solid #e8edf5;border-radius:18px;padding:20px;display:grid;place-items:center;margin-bottom:16px}
-.gc-logo svg{height:50px}
-.gc-row{display:flex;align-items:center;gap:13px;padding:13px;border-radius:14px;background:#f2f7fc;margin-bottom:9px}
-.gc-row .ic{width:40px;height:40px;border-radius:11px;background:var(--grad);display:grid;place-items:center;flex:0 0 auto}
-.gc-row .ic svg{width:19px;height:19px;color:#fff}
-.gc-row b{color:var(--navy);font-size:.96rem;font-family:'Plus Jakarta Sans'}
-.gc-row span{color:var(--muted);font-size:.8rem;display:block}
-.float-badge{position:absolute;z-index:2;background:var(--card);color:var(--ink);border-radius:16px;padding:12px 16px;box-shadow:var(--shadow);display:flex;align-items:center;gap:11px;font-weight:700;font-size:.9rem;animation:floaty 5s ease-in-out infinite}
-.float-badge .fb-ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:#fff}
-.fb-1{top:-14px;left:-26px;animation-delay:.2s}
-.fb-2{bottom:-18px;right:-20px;animation-delay:1.4s}
-@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-.wave{position:absolute;bottom:-1px;left:0;width:100%;line-height:0}
-.wave svg{width:100%;height:70px;display:block}
-.wave path{fill:var(--bg)}
-@media(max-width:920px){.hero-grid{grid-template-columns:1fr;gap:46px}.hero-visual{min-height:auto;order:2}.float-badge{display:none}}
+/* hero — light, airy, animated */
+.hero{position:relative;overflow:hidden;text-align:center;padding:clamp(50px,8vw,100px) 0 clamp(56px,8vw,98px);
+  background:radial-gradient(72% 56% at 50% -8%, rgba(19,181,232,.13), transparent 62%), var(--bg)}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:48px 48px;opacity:.75;
+  -webkit-mask-image:radial-gradient(76% 66% at 50% 24%,#000,transparent 76%);mask-image:radial-gradient(76% 66% at 50% 24%,#000,transparent 76%)}
+.hero-deco{position:absolute;inset:0;z-index:1;pointer-events:none}
+.hero-deco span{position:absolute;border-radius:50%;animation:floatDot 7s ease-in-out infinite}
+.hero-deco .ring{background:none;border:2px solid var(--cyan);opacity:.3}
+.hero-deco .cross{border-radius:0;width:16px;height:16px;opacity:.55}
+.hero-deco .cross::before,.hero-deco .cross::after{content:"";position:absolute;background:var(--cyan)}
+.hero-deco .cross::before{left:7px;top:0;width:2px;height:16px}
+.hero-deco .cross::after{top:7px;left:0;height:2px;width:16px}
+.hero-deco .p1{width:10px;height:10px;background:var(--cyan);top:17%;left:11%;opacity:.55;animation-delay:.2s}
+.hero-deco .p2{width:7px;height:7px;background:var(--amber);top:24%;right:13%;opacity:.6;animation-delay:1.1s}
+.hero-deco .p3{width:13px;height:13px;background:var(--cyan);bottom:19%;left:16%;opacity:.5;animation-delay:.6s}
+.hero-deco .p4{width:8px;height:8px;background:var(--cyan-d);bottom:26%;right:15%;opacity:.55;animation-delay:1.6s}
+.hero-deco .p5{width:46px;height:46px;top:14%;right:22%;animation-delay:.9s}
+.hero-deco .p6{top:66%;right:27%;animation-delay:.4s}
+.hero-deco .p7{width:6px;height:6px;background:var(--amber);top:58%;left:7%;opacity:.6;animation-delay:1.3s}
+@keyframes floatDot{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+.hero-inner{position:relative;z-index:2;max-width:860px;margin:0 auto;display:flex;flex-direction:column;align-items:center}
+.hero-inner>*{animation:heroIn .75s cubic-bezier(.2,.7,.2,1) both}
+.hero-inner>*:nth-child(2){animation-delay:.08s}.hero-inner>*:nth-child(3){animation-delay:.16s}
+.hero-inner>*:nth-child(4){animation-delay:.24s}.hero-inner>*:nth-child(5){animation-delay:.32s}.hero-inner>*:nth-child(6){animation-delay:.4s}
+@keyframes heroIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.hero .badge{display:inline-flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--line);padding:9px 18px;border-radius:40px;font-size:.86rem;font-weight:700;color:var(--ink);box-shadow:var(--shadow-sm)}
+.hero h1{font-size:clamp(2.35rem,6vw,4.3rem);font-weight:800;color:var(--ink);margin:24px 0 20px;letter-spacing:-.03em}
+.hero h1 .hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero .lead{font-size:clamp(1.05rem,2vw,1.24rem);color:var(--muted);max-width:600px;margin:0 auto 32px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:26px}
+.hero-rr{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:center;margin-bottom:36px}
+.hero-rr>span{display:inline-flex;align-items:center;gap:7px;color:var(--ink);font-size:.92rem;font-weight:600}
+.hero-rr>span>svg{width:17px;height:17px;color:#17c07b;flex:0 0 auto}
+.hero-mini{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.hero-mini .m{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 24px;box-shadow:var(--shadow-sm);min-width:118px}
+.hero-mini .m b{font-family:'Plus Jakarta Sans';font-size:1.22rem;font-weight:800;color:var(--ink);display:block}
+.hero-mini .m span{font-size:.8rem;color:var(--muted)}
+@media(max-width:600px){.hero-deco .p5,.hero-deco .p6{display:none}.hero-mini .m{padding:12px 18px;min-width:0;flex:1}}
 
 /* logos / trust strip */
 .strip{background:var(--bg-soft);border-bottom:1px solid var(--line)}
@@ -456,46 +453,29 @@ footer ul a:hover{color:#fff}
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <span class="badge" data-i18n="hero.badge">🔥 Yangi guruhlarga yozilish ochiq</span>
-      <h1><span data-i18n="hero.t1">Ingliz tilini</span> <span class="hl" data-i18n="hero.t2">CTN</span> <span data-i18n="hero.t3">bilan puxta o'rganing</span></h1>
-      <p class="lead" data-i18n="hero.lead">Tajribali ustozlar, kichik guruhlar va zamonaviy metodika bilan noldan ravon gapirishgacha. IELTS, Kids va Speaking yo'nalishlari.</p>
-      <div class="hero-cta">
-        <a href="#contact" class="btn btn-primary btn-lg" data-i18n="hero.cta1">Bepul sinov darsga yozilish</a>
-        <a href="#courses" class="btn btn-white btn-lg" data-i18n="hero.cta2">Kurslarni ko'rish</a>
-      </div>
-      <div class="hero-rr">
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.rr1">Birinchi dars bepul</span></span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.rr2">Hech qanday majburiyat yo'q</span></span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.rr3">5 daqiqada javob</span></span>
-      </div>
-      <div class="hero-mini">
-        <div class="m"><b>IELTS</b><span data-i18n="hero.m1">maqsadli tayyorgarlik</span></div>
-        <div class="m"><b>Kids</b><span data-i18n="hero.m2">6–12 yosh uchun</span></div>
-        <div class="m"><b>Speaking</b><span data-i18n="hero.m3">jonli amaliyot</span></div>
-      </div>
+  <div class="hero-deco" aria-hidden="true">
+    <span class="p1"></span><span class="p2"></span><span class="p3"></span><span class="p4"></span>
+    <span class="ring p5"></span><span class="cross p6"></span><span class="p7"></span>
+  </div>
+  <div class="wrap hero-inner">
+    <span class="badge" data-i18n="hero.badge">🔥 Yangi guruhlarga yozilish ochiq</span>
+    <h1><span data-i18n="hero.t1">Ingliz tilini</span> <span class="hl" data-i18n="hero.t2">CTN</span> <span data-i18n="hero.t3">bilan puxta o'rganing</span></h1>
+    <p class="lead" data-i18n="hero.lead">Tajribali ustozlar, kichik guruhlar va zamonaviy metodika bilan noldan ravon gapirishgacha. IELTS, Kids va Speaking yo'nalishlari.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary btn-lg" data-i18n="hero.cta1">Bepul sinov darsga yozilish</a>
+      <a href="#courses" class="btn btn-ghost btn-lg" data-i18n="hero.cta2">Kurslarni ko'rish</a>
     </div>
-
-    <div class="hero-visual">
-      <div class="float-badge fb-1"><div class="fb-ic" style="background:var(--grad)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></div><div><span style="display:block;font-size:.72rem;color:var(--muted);font-weight:600" data-i18n="hero.fb1a">Bepul</span><span data-i18n="hero.fb1b">Sinov dars</span></div></div>
-      <div class="float-badge fb-2"><div class="fb-ic" style="background:var(--grad)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9"/></svg></div><div><span style="display:block;font-size:.72rem;color:var(--muted);font-weight:600" data-i18n="hero.fb2a">Kichik guruh</span><span data-i18n="hero.fb2">8–12 kishi</span></div></div>
-      <div class="glass-card">
-        <div class="gc-logo">
-          <svg viewBox="0 0 258 60" xmlns="http://www.w3.org/2000/svg">
-            <text x="0" y="45" font-family="'Plus Jakarta Sans',sans-serif" font-size="46" font-weight="800" letter-spacing="-2" fill="#16294F">CTN</text>
-            <ellipse cx="86" cy="29" rx="30" ry="15.5" fill="none" stroke="#12B4E6" stroke-width="6.5" transform="rotate(-20 86 29)"/>
-            <text x="132" y="25" font-family="'Plus Jakarta Sans',sans-serif" font-size="13" font-weight="700" letter-spacing="2.5" fill="#12B4E6">LANGUAGE</text>
-            <text x="132" y="45" font-family="'Plus Jakarta Sans',sans-serif" font-size="13" font-weight="700" letter-spacing="2.5" fill="#12B4E6">CENTRE</text>
-          </svg>
-        </div>
-        <div class="gc-row"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M6 12v5c3 3 9 3 12 0v-5"/><path d="m2 10 10-5 10 5-10 5z"/></svg></div><div><b data-i18n="gc.r1a">General English</b><span data-i18n="gc.r1b">A1 dan C1 darajagacha</span></div></div>
-        <div class="gc-row"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg></div><div><b data-i18n="gc.r2a">IELTS Intensive</b><span data-i18n="gc.r2b">Maqsadli natija uchun</span></div></div>
-        <div class="gc-row"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l19-9-9 19-2-8z"/></svg></div><div><b data-i18n="gc.r3a">Speaking Club</b><span data-i18n="gc.r3b">Har hafta jonli amaliyot</span></div></div>
-      </div>
+    <div class="hero-rr">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.rr1">Birinchi dars bepul</span></span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.rr2">Hech qanday majburiyat yo'q</span></span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.rr3">5 daqiqada javob</span></span>
+    </div>
+    <div class="hero-mini">
+      <div class="m"><b>IELTS</b><span data-i18n="hero.m1">maqsadli tayyorgarlik</span></div>
+      <div class="m"><b>Kids</b><span data-i18n="hero.m2">6–12 yosh uchun</span></div>
+      <div class="m"><b>Speaking</b><span data-i18n="hero.m3">jonli amaliyot</span></div>
     </div>
   </div>
-  <div class="wave"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,40 C360,80 720,0 1080,30 C1260,45 1380,55 1440,50 L1440,70 L0,70 Z"/></svg></div>
 </section>
 
 <!-- TRUST STRIP -->
